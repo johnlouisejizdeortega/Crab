@@ -1,0 +1,23 @@
+{
+  "name": "crab",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Crab — a Grab / inDrive-inspired ride-hailing web app (fixed fare + rider bidding)",
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "postinstall": "npm --workspace server run db:generate",
+    "dev": "concurrently -n server,client -c blue,magenta \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:server": "npm --workspace server run dev",
+    "dev:client": "npm --workspace client run dev",
+    "build": "npm --workspace server run build && npm --workspace client run build",
+    "db:setup": "npm --workspace server run db:setup",
+    "seed": "npm --workspace server run seed",
+    "typecheck": "npm --workspace server run typecheck && npm --workspace client run typecheck"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

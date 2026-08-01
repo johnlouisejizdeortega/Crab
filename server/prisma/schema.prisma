@@ -1,0 +1,130 @@
+// Crab ride-hailing data model.
+// SQLite for zero-config local dev. Enums are modeled as strings (SQLite has no
+// native enum) with values constrained in application code (see src/constants.ts).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String  @id @default(cuid())
+  email        String  @unique
+  passwordHash String
+  name         String
+  phone        String?
+  role         String  // "RIDER" | "DRIVER"
+  avatar       String?
+  ratingAvg    Float   @default(5)
+  ratingCount  Int     @default(0)
+  createdAt    DateTime @default(now())
+
+  driver         Driver?
+  wallet         Wallet?
+  ridesAsRider   Ride[]        @relation("RiderRides")
+  ridesAsDriver  Ride[]        @relation("DriverRides")
+  bids           Bid[]
+  ratingsGiven   Rating[]      @relation("RatingsGiven")
+  ratingsGot     Rating[]      @relation("RatingsReceived")
+}
+
+model Driver {
+  id           String  @id @default(cuid())
+  userId       String  @unique
+  user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  vehicleModel String
+  plate        String
+  color        String  @default("Black")
+  seats        Int     @default(4)
+  isOnline     Boolean @default(false)
+  isSimulated  Boolean @default(false)
+  lat          Float?
+  lng          Float?
+  updatedAt    DateTime @updatedAt
+}
+
+model Ride {
+  id          String   @id @default(cuid())
+  riderId     String
+  rider       User     @relation("RiderRides", fields: [riderId], references: [id])
+  driverId    String?
+  driver      User?    @relation("DriverRides", fields: [driverId], references: [id])
+
+  pickupLat   Float
+  pickupLng   Float
+  pickupLabel String
+  dropLat     Float
+  dropLng     Float
+  dropLabel   String
+
+  model       String   // "FIXED" | "BID"
+  fixedFare   Float?   // system fare for FIXED rides
+  offerFare   Float?   // rider's proposed fare for BID rides
+  agreedFare  Float?   // final agreed price once matched
+  distanceKm  Float
+  durationMin Float
+
+  status      String   @default("REQUESTED") // REQUESTED|MATCHED|ARRIVING|IN_PROGRESS|COMPLETED|CANCELLED
+  createdAt   DateTime @default(now())
+  matchedAt   DateTime?
+  completedAt DateTime?
+
+  bids        Bid[]
+  ratings     Rating[]
+  transactions Transaction[]
+}
+
+model Bid {
+  id        String   @id @default(cuid())
+  rideId    String
+  ride      Ride     @relation(fields: [rideId], references: [id], onDelete: Cascade)
+  driverId  String
+  driver    User     @relation(fields: [driverId], references: [id])
+  amount    Float
+  note      String?
+  status    String   @default("OPEN") // OPEN|ACCEPTED|REJECTED
+  createdAt DateTime @default(now())
+
+  @@unique([rideId, driverId])
+}
+
+model Rating {
+  id        String   @id @default(cuid())
+  rideId    String
+  ride      Ride     @relation(fields: [rideId], references: [id], onDelete: Cascade)
+  byUserId  String
+  by        User     @relation("RatingsGiven", fields: [byUserId], references: [id])
+  toUserId  String
+  to        User     @relation("RatingsReceived", fields: [toUserId], references: [id])
+  stars     Int
+  comment   String?
+  createdAt DateTime @default(now())
+
+  @@unique([rideId, byUserId])
+}
+
+model Wallet {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  balance   Float    @default(50)
+  updatedAt DateTime @updatedAt
+
+  transactions Transaction[]
+}
+
+model Transaction {
+  id        String   @id @default(cuid())
+  walletId  String
+  wallet    Wallet   @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  rideId    String?
+  ride      Ride?    @relation(fields: [rideId], references: [id])
+  amount    Float    // positive = credit, negative = debit
+  kind      String   // "TOPUP" | "RIDE_PAYMENT" | "RIDE_EARNING"
+  note      String?
+  createdAt DateTime @default(now())
+}

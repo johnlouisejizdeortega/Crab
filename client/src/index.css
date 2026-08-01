@@ -1,0 +1,61 @@
+@import 'leaflet/dist/leaflet.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #f6f7f9;
+  color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Leaflet marker fix (icons are otherwise broken under bundlers) is handled in
+   Map.tsx via divIcons, but keep tiles crisp. */
+.leaflet-container {
+  font: inherit;
+  background: #aadaff;
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 font-semibold transition active:scale-[.98] disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn-primary {
+    @apply btn bg-brand-500 text-white hover:bg-brand-600 shadow-sm;
+  }
+  .btn-dark {
+    @apply btn bg-slate-900 text-white hover:bg-slate-800;
+  }
+  .btn-ghost {
+    @apply btn bg-white text-slate-700 border border-slate-200 hover:bg-slate-50;
+  }
+  .card {
+    @apply bg-white rounded-2xl shadow-sm border border-slate-100;
+  }
+  .input {
+    @apply w-full rounded-xl border border-slate-200 px-3.5 py-2.5 outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-100 transition;
+  }
+  .label {
+    @apply block text-sm font-medium text-slate-600 mb-1.5;
+  }
+  .pill {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold;
+  }
+}
+
+/* Smooth marker transitions on the map */
+.crab-marker {
+  transition: transform 0.8s linear;
+}
