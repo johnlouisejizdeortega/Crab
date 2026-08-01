@@ -22,10 +22,16 @@ body {
 }
 
 /* Leaflet marker fix (icons are otherwise broken under bundlers) is handled in
-   Map.tsx via divIcons, but keep tiles crisp. */
+   Map.tsx via divIcons. The grid backdrop shows through until raster tiles load
+   (and stays as a graceful fallback if a device is offline / tiles are blocked). */
 .leaflet-container {
   font: inherit;
-  background: #aadaff;
+  background-color: #e9edf2;
+  background-image: linear-gradient(rgba(100, 116, 139, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(100, 116, 139, 0.14) 1px, transparent 1px),
+    linear-gradient(rgba(100, 116, 139, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(100, 116, 139, 0.07) 1px, transparent 1px);
+  background-size: 140px 140px, 140px 140px, 28px 28px, 28px 28px;
 }
 
 @layer components {
