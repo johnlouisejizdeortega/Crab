@@ -8,7 +8,7 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
-    `flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition ${
+    `flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-sm font-medium transition ${
       isActive ? 'bg-slate-900 text-white' : 'text-slate-600 hover:bg-slate-100'
     }`;
 
@@ -46,7 +46,7 @@ export default function Navbar() {
                 logout();
                 navigate('/');
               }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-slate-500 hover:bg-rose-50 hover:text-rose-600"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-sm font-medium text-slate-500 hover:bg-rose-50 hover:text-rose-600"
             >
               <LogOut size={17} /> Sign out
             </button>

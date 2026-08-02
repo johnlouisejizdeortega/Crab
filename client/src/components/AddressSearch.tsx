@@ -51,7 +51,7 @@ export default function AddressSearch({ placeholder, value, onSelect }: Props) {
         }}
       />
       {open && (q.trim().length >= 3 || loading) && (
-        <div className="absolute z-[1000] mt-1 w-full max-h-64 overflow-auto card p-1 text-sm">
+        <div className="absolute z-[1000] mt-2 w-full max-h-64 overflow-auto bg-white rounded-2xl border border-slate-100 shadow-[0_12px_40px_-12px_rgba(15,23,42,0.25)] p-1.5 text-sm">
           {loading && <div className="px-3 py-2 text-slate-400">Searching…</div>}
           {!loading && results.length === 0 && (
             <div className="px-3 py-2 text-slate-400">No matches</div>

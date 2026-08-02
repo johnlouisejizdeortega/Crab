@@ -1,5 +1,5 @@
 export const money = (n: number | null | undefined) =>
-  n == null ? '—' : `$${n.toFixed(2)}`;
+  n == null ? '—' : `${n < 0 ? '-' : ''}$${Math.abs(n).toFixed(2)}`;
 
 export const km = (n: number) => `${n.toFixed(1)} km`;
 export const mins = (n: number) => `${Math.round(n)} min`;

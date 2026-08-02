@@ -62,7 +62,7 @@ export default function Profile() {
         </div>
 
         {isDriver && (
-          <div className="rounded-xl bg-slate-50 border border-slate-100 p-4 space-y-3">
+          <div className="rounded-2xl bg-slate-50 border border-slate-100 p-4 space-y-3">
             <p className="text-sm font-semibold text-slate-600">Vehicle</p>
             <div className="grid grid-cols-2 gap-3">
               <div>

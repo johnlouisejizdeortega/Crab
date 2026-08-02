@@ -57,15 +57,13 @@ export default function Register() {
         <form onSubmit={onSubmit} className="card p-6 space-y-4">
           <h1 className="text-xl font-bold">Create your account</h1>
 
-          <div className="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-xl">
+          <div className="segment grid-cols-2">
             {(['RIDER', 'DRIVER'] as Role[]).map((r) => (
               <button
                 type="button"
                 key={r}
                 onClick={() => setRole(r)}
-                className={`flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition ${
-                  role === r ? 'bg-white shadow-sm text-slate-900' : 'text-slate-500'
-                }`}
+                className={`segment-btn ${role === r ? 'segment-btn-active' : ''}`}
               >
                 {r === 'RIDER' ? <Car size={18} /> : <SteeringWheel size={18} />}
                 {r === 'RIDER' ? 'Ride' : 'Drive'}
@@ -95,7 +93,7 @@ export default function Register() {
           </div>
 
           {role === 'DRIVER' && (
-            <div className="rounded-xl bg-slate-50 border border-slate-100 p-4 space-y-3">
+            <div className="rounded-2xl bg-slate-50 border border-slate-100 p-4 space-y-3">
               <p className="text-sm font-semibold text-slate-600">Vehicle details</p>
               <div className="grid grid-cols-2 gap-3">
                 <div>

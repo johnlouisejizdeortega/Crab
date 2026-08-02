@@ -45,16 +45,16 @@ export default function Wallet() {
     <div className="mx-auto max-w-2xl w-full px-4 py-8">
       <h1 className="text-2xl font-bold mb-6">Wallet</h1>
 
-      <div className="card p-6 bg-gradient-to-br from-slate-900 to-slate-700 text-white">
-        <p className="text-sm text-white/70">Available balance</p>
-        <p className="text-4xl font-extrabold mt-1">{money(balance)}</p>
-        <div className="mt-5 flex gap-2">
+      <div className="rounded-3xl p-6 sm:p-7 bg-slate-900 text-white">
+        <p className="text-sm text-white/60">Available balance</p>
+        <p className="text-[2.75rem] leading-none font-extrabold mt-2">{money(balance)}</p>
+        <div className="mt-6 flex gap-2">
           {[10, 25, 50].map((a) => (
             <button
               key={a}
               disabled={busy}
               onClick={() => topup(a)}
-              className="btn bg-white/15 hover:bg-white/25 text-white text-sm"
+              className="btn bg-white/10 hover:bg-white/20 text-white text-sm !py-2.5"
             >
               <Plus size={16} /> {money(a)}
             </button>
@@ -81,7 +81,8 @@ export default function Wallet() {
               <div className="flex-1 min-w-0">
                 <p className="font-medium text-sm">{KIND_LABEL[t.kind] ?? t.kind}</p>
                 <p className="text-xs text-slate-400 truncate">
-                  {t.note ?? ''} · {timeAgo(t.createdAt)}
+                  {t.note && t.note !== (KIND_LABEL[t.kind] ?? '') ? `${t.note} · ` : ''}
+                  {timeAgo(t.createdAt)}
                 </p>
               </div>
               <div className={`font-bold ${t.amount >= 0 ? 'text-emerald-600' : 'text-slate-700'}`}>

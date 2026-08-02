@@ -281,11 +281,11 @@ function RequestForm(props: {
   const ready = pickup && drop && estimate;
 
   return (
-    <div className="card p-5 space-y-4 rounded-b-none rounded-t-3xl sm:rounded-3xl max-h-[82vh] overflow-y-auto">
+    <div className="card p-6 space-y-5 rounded-b-none rounded-t-[1.75rem] sm:rounded-3xl max-h-[82vh] overflow-y-auto">
       <div className="grabber" />
       <div>
-        <h1 className="text-lg font-bold">Where to?</h1>
-        <p className="text-sm text-slate-500">Search an address or tap the map.</p>
+        <h1 className="text-xl font-bold">Where to?</h1>
+        <p className="text-sm text-slate-500 mt-0.5">Search an address or tap the map.</p>
       </div>
 
       <div className="space-y-2">
@@ -331,16 +331,16 @@ function RequestForm(props: {
         </div>
       )}
 
-      <div className="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-xl">
+      <div className="segment grid-cols-2">
         <button
           onClick={() => setMode('FIXED')}
-          className={`flex items-center justify-center gap-1.5 py-2 rounded-lg text-sm font-semibold transition ${mode === 'FIXED' ? 'bg-white shadow-sm' : 'text-slate-500'}`}
+          className={`segment-btn ${mode === 'FIXED' ? 'segment-btn-active' : ''}`}
         >
           <Zap size={16} /> Fixed fare
         </button>
         <button
           onClick={() => setMode('BID')}
-          className={`flex items-center justify-center gap-1.5 py-2 rounded-lg text-sm font-semibold transition ${mode === 'BID' ? 'bg-white shadow-sm' : 'text-slate-500'}`}
+          className={`segment-btn ${mode === 'BID' ? 'segment-btn-active' : ''}`}
         >
           <Coins size={16} /> Name price
         </button>
@@ -418,7 +418,7 @@ function ActiveRidePanel({
   const sortedBids = [...bids].sort((a, b) => a.amount - b.amount);
 
   return (
-    <div className="card p-5 space-y-4 rounded-b-none rounded-t-3xl sm:rounded-3xl max-h-[82vh] overflow-y-auto">
+    <div className="card p-6 space-y-5 rounded-b-none rounded-t-[1.75rem] sm:rounded-3xl max-h-[82vh] overflow-y-auto">
       <div className="grabber" />
       <div className="flex items-center justify-between">
         <div>

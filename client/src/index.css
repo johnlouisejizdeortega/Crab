@@ -16,9 +16,17 @@ body,
 
 body {
   margin: 0;
-  background: #f6f7f9;
+  background: #f7f8fa;
   color: #0f172a;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.011em;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
 }
 
 /* Leaflet marker fix (icons are otherwise broken under bundlers) is handled in
@@ -26,20 +34,20 @@ body {
    (and stays as a graceful fallback if a device is offline / tiles are blocked). */
 .leaflet-container {
   font: inherit;
-  background-color: #e9edf2;
-  background-image: linear-gradient(rgba(100, 116, 139, 0.14) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(100, 116, 139, 0.14) 1px, transparent 1px),
-    linear-gradient(rgba(100, 116, 139, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(100, 116, 139, 0.07) 1px, transparent 1px);
-  background-size: 140px 140px, 140px 140px, 28px 28px, 28px 28px;
+  background-color: #eef1f5;
+  background-image: linear-gradient(rgba(100, 116, 139, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(100, 116, 139, 0.09) 1px, transparent 1px),
+    linear-gradient(rgba(100, 116, 139, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(100, 116, 139, 0.045) 1px, transparent 1px);
+  background-size: 160px 160px, 160px 160px, 32px 32px, 32px 32px;
 }
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 font-semibold transition active:scale-[.98] disabled:opacity-50 disabled:pointer-events-none;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 font-semibold transition active:scale-[.98] disabled:opacity-40 disabled:pointer-events-none;
   }
   .btn-primary {
-    @apply btn bg-brand-500 text-white hover:bg-brand-600 shadow-sm;
+    @apply btn bg-brand-500 text-white hover:bg-brand-600;
   }
   .btn-dark {
     @apply btn bg-slate-900 text-white hover:bg-slate-800;
@@ -47,17 +55,33 @@ body {
   .btn-ghost {
     @apply btn bg-white text-slate-700 border border-slate-200 hover:bg-slate-50;
   }
+  .btn-lg {
+    @apply px-6 py-3.5 text-base;
+  }
   .card {
-    @apply bg-white rounded-2xl shadow-sm border border-slate-100;
+    @apply bg-white rounded-3xl border border-slate-100;
   }
   .input {
-    @apply w-full rounded-xl border border-slate-200 px-3.5 py-2.5 outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-100 transition;
+    @apply w-full rounded-full border border-slate-200 px-5 py-3 outline-none focus:border-brand-400 focus:ring-4 focus:ring-brand-100/70 transition placeholder:text-slate-400;
+  }
+  .textarea {
+    @apply w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none focus:border-brand-400 focus:ring-4 focus:ring-brand-100/70 transition placeholder:text-slate-400;
   }
   .label {
-    @apply block text-sm font-medium text-slate-600 mb-1.5;
+    @apply block text-sm font-medium text-slate-500 mb-1.5;
   }
   .pill {
     @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold;
+  }
+  /* Segmented control (pill) */
+  .segment {
+    @apply grid gap-1 p-1 bg-slate-100 rounded-full;
+  }
+  .segment-btn {
+    @apply flex items-center justify-center gap-1.5 py-2.5 rounded-full text-sm font-semibold text-slate-500 transition;
+  }
+  .segment-btn-active {
+    @apply bg-white text-slate-900 shadow-sm;
   }
 }
 
@@ -77,10 +101,10 @@ body {
 @layer components {
   /* Bottom-sheet on mobile, floating left card on desktop */
   .sheet {
-    @apply card absolute inset-x-0 bottom-0 rounded-b-none rounded-t-3xl shadow-[0_-8px_30px_rgba(0,0,0,0.12)]
-      sm:inset-x-auto sm:bottom-auto sm:top-6 sm:left-6 sm:w-[26rem] sm:max-w-[calc(100vw-3rem)] sm:rounded-3xl sm:shadow-xl;
+    @apply card absolute inset-x-0 bottom-0 rounded-b-none rounded-t-[1.75rem] shadow-[0_-10px_40px_-12px_rgba(15,23,42,0.18)]
+      sm:inset-x-auto sm:bottom-auto sm:top-6 sm:left-6 sm:w-[26rem] sm:max-w-[calc(100vw-3rem)] sm:rounded-3xl sm:shadow-[0_16px_50px_-16px_rgba(15,23,42,0.25)];
   }
   .grabber {
-    @apply mx-auto mb-1 h-1.5 w-10 rounded-full bg-slate-200 sm:hidden;
+    @apply mx-auto mb-2 h-1.5 w-11 rounded-full bg-slate-200 sm:hidden;
   }
 }

@@ -43,7 +43,7 @@ export default function RatingModal({ ride, counterpartName, onDone }: Props) {
           <Stars value={stars} onChange={setStars} size={34} />
         </div>
         <textarea
-          className="input mt-4 h-20 resize-none"
+          className="textarea mt-4 h-20 resize-none text-left"
           placeholder="Add a comment (optional)"
           value={comment}
           onChange={(e) => setComment(e.target.value)}

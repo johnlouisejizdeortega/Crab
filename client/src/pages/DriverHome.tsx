@@ -255,9 +255,9 @@ function RequestCard({
   const toPickup = haversineKm(pos, ride.pickup);
 
   return (
-    <div className="card p-4 space-y-3">
+    <div className="card p-5 space-y-3.5">
       <div className="flex items-center justify-between">
-        <span className="pill bg-slate-100 text-slate-600">
+        <span className="pill bg-brand-50 text-brand-600">
           {ride.model === 'BID' ? <Coins size={13} /> : <Zap size={13} />}
           {ride.model === 'BID' ? 'Offer' : 'Fixed'}
         </span>
@@ -290,11 +290,11 @@ function RequestCard({
             <span className="font-bold">{money(ride.offerFare)}</span>
           </div>
           <div className="flex gap-2">
-            <div className="flex items-center gap-1 flex-1 rounded-xl border border-slate-200 px-2">
+            <div className="flex items-center gap-1 flex-1 rounded-full border border-slate-200 px-4">
               <span className="text-slate-400">$</span>
               <input
                 type="number"
-                className="w-full py-2 outline-none"
+                className="w-full py-2.5 outline-none bg-transparent"
                 value={amount || ''}
                 min={1}
                 step={0.5}
