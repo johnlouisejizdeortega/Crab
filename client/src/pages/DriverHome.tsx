@@ -260,10 +260,10 @@ function RequestCard({
   const toPickup = haversineKm(pos, ride.pickup);
 
   return (
-    <div className="card-glass p-5 space-y-3.5">
+    <div className="card-glass p-4 space-y-3">
       <div className="flex items-center justify-between">
-        <span className="pill bg-brand-50 text-brand-600">
-          {ride.model === 'BID' ? <Coins size={13} /> : <Zap size={13} />}
+        <span className="pill bg-neutral-100 text-neutral-600">
+          {ride.model === 'BID' ? <Coins size={12} /> : <Zap size={12} />}
           {ride.model === 'BID' ? 'Offer' : 'Fixed'}
         </span>
         <span className="text-xs text-slate-400">{toPickup.toFixed(1)} km to pickup</span>
@@ -275,7 +275,7 @@ function RequestCard({
           {ride.pickup.label.split(',').slice(0, 2).join(',')}
         </p>
         <p className="flex items-center gap-2">
-          <MapPin size={14} className="text-brand-500 shrink-0" />
+          <MapPin size={14} className="text-neutral-400 shrink-0" />
           {ride.drop.label.split(',').slice(0, 2).join(',')}
         </p>
         <p className="text-xs text-slate-400">{km(ride.distanceKm)} trip</p>
@@ -351,21 +351,21 @@ function ActiveTrip({
       : null;
 
   return (
-    <div className="card-glass p-5 space-y-4">
+    <div className="card-glass p-4 space-y-3">
       <div className="flex items-center justify-between">
         <div>
           <p className="text-xs uppercase tracking-wide text-slate-400">Active trip</p>
           <h2 className="text-lg font-bold">{STATUS_LABEL[trip.status]}</h2>
         </div>
         <div className="text-right">
-          <div className="text-2xl font-bold tabular-nums">{money(trip.agreedFare)}</div>
-          <div className="text-xs text-slate-400">you earn</div>
+          <div className="text-xl font-bold tabular-nums">{money(trip.agreedFare)}</div>
+          <div className="text-[11px] text-neutral-400">you earn</div>
         </div>
       </div>
 
       <div className="flex items-center gap-3 rounded-2xl bg-black/[0.03] p-3">
-        <div className="app-chip h-11 w-11 rounded-full bg-brand-500">
-          <UserRound size={22} />
+        <div className="app-chip h-9 w-9 rounded-full bg-neutral-900 text-white">
+          <UserRound size={18} />
         </div>
         <div className="flex-1">
           <div className="flex items-center gap-2">
@@ -384,7 +384,7 @@ function ActiveTrip({
           {trip.pickup.label.split(',').slice(0, 2).join(',')}
         </p>
         <p className="flex items-center gap-2">
-          <MapPin size={14} className="text-brand-500 shrink-0" />
+          <MapPin size={14} className="text-neutral-400 shrink-0" />
           {trip.drop.label.split(',').slice(0, 2).join(',')}
         </p>
       </div>
@@ -392,7 +392,7 @@ function ActiveTrip({
       <p className="text-xs text-slate-400 text-center">Tap the map to drive your car toward the pin.</p>
 
       {next && (
-        <button className="btn-primary w-full text-base py-3" disabled={busy} onClick={() => onAdvance(next.status)}>
+        <button className="btn-primary btn-lg w-full" disabled={busy} onClick={() => onAdvance(next.status)}>
           {next.label}
         </button>
       )}

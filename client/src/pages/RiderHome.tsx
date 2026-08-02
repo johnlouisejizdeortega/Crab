@@ -281,7 +281,7 @@ function RequestForm(props: {
   const ready = pickup && drop && estimate;
 
   return (
-    <div className="card-glass p-6 space-y-5 rounded-b-none rounded-t-[1.5rem] sm:rounded-[1.5rem] max-h-[82vh] overflow-y-auto">
+    <div className="card-glass p-4 space-y-3.5 rounded-b-none rounded-t-2xl sm:rounded-2xl max-h-[82vh] overflow-y-auto">
       <div className="grabber" />
       <div>
         <h1 className="text-xl font-bold">Where to?</h1>
@@ -349,21 +349,21 @@ function RequestForm(props: {
       {mode === 'FIXED' ? (
         <div className="flex items-end justify-between">
           <div>
-            <p className="text-sm text-slate-500">Upfront fare</p>
-            <p className="text-4xl font-bold tracking-tight tabular-nums">{estimate ? money(estimate.fixedFare) : '—'}</p>
+            <p className="text-[13px] text-neutral-500">Upfront fare</p>
+            <p className="text-2xl font-bold tabular-nums">{estimate ? money(estimate.fixedFare) : '—'}</p>
           </div>
-          <span className="pill bg-brand-50 text-brand-700">Auto-matched</span>
+          <span className="pill bg-neutral-100 text-neutral-500">Auto-matched</span>
         </div>
       ) : (
         <div>
           <label className="label">Your offer</label>
           <div className="flex items-center gap-2">
-            <span className="text-2xl font-bold text-slate-400">$</span>
+            <span className="text-xl font-bold text-neutral-400">$</span>
             <input
               type="number"
               min={1}
               step={0.5}
-              className="input text-2xl font-extrabold"
+              className="input !text-xl font-bold !py-2.5"
               value={offer || ''}
               onChange={(e) => setOffer(parseFloat(e.target.value) || 0)}
             />
@@ -387,7 +387,7 @@ function RequestForm(props: {
       )}
 
       <button
-        className="btn-primary w-full text-base py-3"
+        className="btn-primary btn-lg w-full"
         disabled={!ready || props.busy || (mode === 'BID' && offer <= 0)}
         onClick={props.onRequest}
       >
@@ -418,7 +418,7 @@ function ActiveRidePanel({
   const sortedBids = [...bids].sort((a, b) => a.amount - b.amount);
 
   return (
-    <div className="card-glass p-6 space-y-5 rounded-b-none rounded-t-[1.5rem] sm:rounded-[1.5rem] max-h-[82vh] overflow-y-auto">
+    <div className="card-glass p-4 space-y-3.5 rounded-b-none rounded-t-2xl sm:rounded-2xl max-h-[82vh] overflow-y-auto">
       <div className="grabber" />
       <div className="flex items-center justify-between">
         <div>
@@ -427,8 +427,8 @@ function ActiveRidePanel({
           </p>
           <h2 className="text-lg font-bold">{STATUS_LABEL[ride.status]}</h2>
         </div>
-        <span className="app-chip h-11 w-11 bg-brand-500">
-          {searching ? <Search size={20} /> : <Car size={20} />}
+        <span className="app-chip h-9 w-9 bg-neutral-900 text-white">
+          {searching ? <Search size={17} /> : <Car size={17} />}
         </span>
       </div>
 
@@ -470,8 +470,8 @@ function ActiveRidePanel({
       {!searching && ride.driver && (
         <div className="space-y-3">
           <div className="flex items-center gap-3 rounded-2xl bg-black/[0.03] p-3">
-            <div className="app-chip h-11 w-11 rounded-full bg-brand-500">
-              <UserRound size={22} />
+            <div className="app-chip h-9 w-9 rounded-full bg-neutral-900 text-white">
+              <UserRound size={18} />
             </div>
             <div className="flex-1">
               <div className="flex items-center gap-2">
@@ -499,7 +499,7 @@ function ActiveRidePanel({
         </span>
         <ArrowRight size={14} className="text-slate-300" />
         <span className="flex items-center gap-1.5">
-          <MapPin size={13} className="text-brand-500" /> {ride.drop.label.split(',')[0]}
+          <MapPin size={13} className="text-neutral-400" /> {ride.drop.label.split(',')[0]}
         </span>
       </div>
 

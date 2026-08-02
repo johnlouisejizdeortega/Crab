@@ -40,7 +40,7 @@ export default function Navbar() {
             <NavLink to="/profile" className={linkClass}>
               <UserRound size={17} /> Profile
             </NavLink>
-            <span className="mx-2 pill bg-brand-50 text-brand-700">{money(user.wallet?.balance ?? 0)}</span>
+            <span className="mx-2 pill bg-neutral-100 text-neutral-600">{money(user.wallet?.balance ?? 0)}</span>
             <button
               onClick={() => {
                 logout();

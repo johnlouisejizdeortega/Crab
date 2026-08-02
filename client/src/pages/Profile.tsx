@@ -37,8 +37,8 @@ export default function Profile() {
   return (
     <div className="mx-auto max-w-lg w-full px-4 py-8">
       <div className="card p-6 mb-6 flex items-center gap-4">
-        <div className="app-chip h-16 w-16 rounded-2xl bg-brand-500">
-          {isDriver ? <SteeringWheel size={30} /> : <UserRound size={30} />}
+        <div className="app-chip h-14 w-14 rounded-2xl bg-neutral-900 text-white">
+          {isDriver ? <SteeringWheel size={26} /> : <UserRound size={26} />}
         </div>
         <div>
           <h1 className="text-xl font-bold">{user.name}</h1>

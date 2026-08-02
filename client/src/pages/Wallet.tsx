@@ -43,26 +43,26 @@ export default function Wallet() {
 
   return (
     <div className="mx-auto max-w-2xl w-full px-4 py-8">
-      <h1 className="text-2xl font-bold mb-6">Wallet</h1>
+      <h1 className="text-xl font-bold mb-4">Wallet</h1>
 
-      <div className="rounded-2xl p-6 sm:p-7 text-white bg-brand-500">
-        <p className="text-sm text-white/80">Available balance</p>
-        <p className="text-[2.75rem] leading-none font-bold mt-2 tabular-nums">{money(balance)}</p>
-        <div className="mt-6 flex gap-2">
+      <div className="rounded-2xl p-5 text-white bg-neutral-900">
+        <p className="text-[13px] text-white/60">Available balance</p>
+        <p className="text-3xl leading-none font-bold mt-1.5 tabular-nums">{money(balance)}</p>
+        <div className="mt-5 flex gap-2">
           {[10, 25, 50].map((a) => (
             <button
               key={a}
               disabled={busy}
               onClick={() => topup(a)}
-              className="btn bg-white/20 hover:bg-white/30 text-white text-sm !py-2.5"
+              className="btn bg-white/10 hover:bg-white/20 text-white !py-1.5 !px-3 text-[13px]"
             >
-              <Plus size={16} /> {money(a)}
+              <Plus size={15} /> {money(a)}
             </button>
           ))}
         </div>
       </div>
 
-      <h2 className="section-title mt-8">Transactions</h2>
+      <h2 className="section-title mt-6">Transactions</h2>
       {loading ? (
         <p className="text-slate-400 px-4">Loading…</p>
       ) : txns.length === 0 ? (
@@ -72,14 +72,14 @@ export default function Wallet() {
           {txns.map((t) => (
             <div key={t.id} className="list-row">
               <div
-                className={`app-chip h-9 w-9 shrink-0 ${
-                  t.amount >= 0 ? 'bg-emerald-500' : 'bg-slate-400'
+                className={`app-chip h-8 w-8 shrink-0 ${
+                  t.amount >= 0 ? 'bg-emerald-500 text-white' : 'bg-neutral-200 text-neutral-600'
                 }`}
               >
-                {t.amount >= 0 ? <ArrowDownLeft size={18} /> : <ArrowUpRight size={18} />}
+                {t.amount >= 0 ? <ArrowDownLeft size={16} /> : <ArrowUpRight size={16} />}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-medium text-[15px]">{KIND_LABEL[t.kind] ?? t.kind}</p>
+                <p className="font-medium text-[13px]">{KIND_LABEL[t.kind] ?? t.kind}</p>
                 <p className="text-xs text-slate-400 truncate">
                   {t.note && t.note !== (KIND_LABEL[t.kind] ?? '') ? `${t.note} · ` : ''}
                   {timeAgo(t.createdAt)}

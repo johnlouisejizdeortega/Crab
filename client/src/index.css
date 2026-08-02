@@ -8,6 +8,11 @@
   color-scheme: light;
 }
 
+/* Very compact: shrink the whole rem-based scale (text + spacing). */
+html {
+  font-size: 14px;
+}
+
 html,
 body,
 #root {
@@ -16,15 +21,17 @@ body,
 
 body {
   margin: 0;
-  color: #1c1c1e;
+  color: #18181b;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: -0.01em;
-  /* iOS systemGroupedBackground */
-  background-color: #f2f2f7;
+  /* neutral base + a faint wallpaper so glass reads on content screens too */
+  background-color: #f4f4f5;
+  background-image: radial-gradient(60rem 42rem at 112% -10%, rgba(120, 130, 150, 0.14), transparent 60%),
+    radial-gradient(50rem 40rem at -14% 6%, rgba(120, 130, 150, 0.1), transparent 60%);
+  background-attachment: fixed;
 }
 
-/* iOS large-title feel */
 h1,
 h2,
 h3 {
@@ -42,81 +49,86 @@ h3 {
 }
 
 @layer components {
-  /* Apple vibrancy materials: blur + saturation + translucency + light edge */
+  /* Real vibrancy glass: low opacity + strong blur/saturation so the backdrop
+     shows through; hairline edge + inner top highlight. */
   .material {
-    @apply bg-white/60 backdrop-blur-2xl backdrop-saturate-150 border border-white/50 shadow-material;
+    @apply bg-white/45 backdrop-blur-2xl backdrop-saturate-[1.8] border border-white/60 shadow-material;
   }
   .material-thick {
-    @apply bg-white/75 backdrop-blur-2xl backdrop-saturate-150 border border-white/60 shadow-material;
+    @apply bg-white/60 backdrop-blur-2xl backdrop-saturate-[1.8] border border-white/60 shadow-material;
   }
   .material-bar {
-    @apply bg-white/70 backdrop-blur-xl backdrop-saturate-150;
+    @apply bg-white/55 backdrop-blur-xl backdrop-saturate-[1.8];
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 font-semibold transition active:scale-[.98] disabled:opacity-40 disabled:pointer-events-none;
+    @apply inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition active:scale-[.98] disabled:opacity-40 disabled:pointer-events-none;
   }
-  /* iOS filled accent (solid, restrained) */
+  /* Primary action = neutral near-black (orange stays an accent, not a surface) */
   .btn-primary {
-    @apply btn bg-brand-500 text-white hover:bg-brand-600 active:brightness-95;
+    @apply btn bg-neutral-900 text-white hover:bg-neutral-800 active:brightness-95;
   }
   .btn-dark {
-    @apply btn bg-slate-900 text-white hover:bg-slate-800;
+    @apply btn bg-neutral-900 text-white hover:bg-neutral-800;
   }
-  /* iOS tinted secondary (subtle gray) */
+  /* Tinted neutral secondary */
   .btn-tinted {
-    @apply btn bg-slate-900/[0.06] text-slate-900 hover:bg-slate-900/[0.1];
+    @apply btn bg-neutral-900/[0.06] text-neutral-900 hover:bg-neutral-900/[0.1];
   }
   /* Glass capsule */
   .btn-ghost {
-    @apply btn material text-slate-800 hover:bg-white/80;
+    @apply btn material text-neutral-800 hover:bg-white/70;
+  }
+  /* Small orange accent action (used rarely) */
+  .btn-accent {
+    @apply btn bg-brand-500 text-white hover:bg-brand-600;
   }
   .btn-lg {
-    @apply px-6 py-3.5 text-base;
+    @apply px-5 py-2.5 text-[15px];
   }
-  /* iOS grouped card: flat white on the grouped background */
+  /* Grouped card: flat neutral */
   .card {
-    @apply bg-white rounded-2xl border border-black/[0.06];
+    @apply bg-white rounded-xl border border-black/[0.06];
   }
-  /* Glass card for overlays that float over the map */
+  /* Glass card for overlays over the map */
   .card-glass {
-    @apply material-thick rounded-[1.5rem];
+    @apply material-thick rounded-2xl;
   }
   .input {
-    @apply w-full rounded-2xl bg-black/[0.04] border border-transparent px-4 py-3 outline-none focus:bg-white focus:border-brand-300 focus:ring-2 focus:ring-brand-200 transition placeholder:text-slate-400;
+    @apply w-full rounded-xl bg-black/[0.05] border border-transparent px-3.5 py-2 text-sm outline-none focus:bg-white focus:border-neutral-300 focus:ring-2 focus:ring-neutral-200 transition placeholder:text-neutral-400;
   }
   .textarea {
-    @apply input rounded-2xl;
+    @apply input;
   }
   .label {
-    @apply block text-sm font-medium text-slate-500 mb-1.5;
+    @apply block text-[13px] font-medium text-neutral-500 mb-1;
   }
   .pill {
-    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold;
+    @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold;
   }
-  /* iOS UISegmentedControl */
+  /* Segmented control */
   .segment {
-    @apply grid gap-1 p-1 bg-black/[0.05] rounded-xl;
+    @apply grid gap-1 p-0.5 bg-black/[0.05] rounded-lg;
   }
   .segment-btn {
-    @apply flex items-center justify-center gap-1.5 py-2 rounded-lg text-sm font-semibold text-slate-600 transition;
+    @apply flex items-center justify-center gap-1.5 py-1.5 rounded-md text-[13px] font-semibold text-neutral-600 transition;
   }
   .segment-btn-active {
-    @apply bg-white text-slate-900 shadow-sm;
+    @apply bg-white text-neutral-900 shadow-sm;
   }
-  /* iOS grouped list */
+  /* Grouped list (glass over the wallpaper) */
   .list-group {
-    @apply bg-white rounded-2xl border border-black/[0.06] overflow-hidden;
+    @apply material-thick rounded-xl overflow-hidden;
   }
   .list-row {
-    @apply flex items-center gap-3 px-4 py-3;
+    @apply flex items-center gap-3 px-3.5 py-2.5;
   }
   .section-title {
-    @apply px-4 mb-2 text-xs font-semibold uppercase tracking-wide text-slate-400;
+    @apply px-3.5 mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-neutral-400;
   }
-  /* iOS colored rounded-square leading icon */
+  /* Rounded-square leading icon (neutral by default) */
   .app-chip {
-    @apply grid place-items-center rounded-[0.8rem] text-white;
+    @apply grid place-items-center rounded-[0.7rem];
   }
 }
 
@@ -136,10 +148,10 @@ h3 {
 @layer components {
   /* Bottom-sheet on mobile, floating left card on desktop */
   .sheet {
-    @apply material-thick absolute inset-x-0 bottom-0 rounded-b-none rounded-t-[1.5rem]
-      sm:inset-x-auto sm:bottom-auto sm:top-6 sm:left-6 sm:w-[26rem] sm:max-w-[calc(100vw-3rem)] sm:rounded-[1.5rem];
+    @apply material-thick absolute inset-x-0 bottom-0 rounded-b-none rounded-t-2xl
+      sm:inset-x-auto sm:bottom-auto sm:top-5 sm:left-5 sm:w-[22rem] sm:max-w-[calc(100vw-2.5rem)] sm:rounded-2xl;
   }
   .grabber {
-    @apply mx-auto mb-2 h-1.5 w-9 rounded-full bg-slate-400/50 sm:hidden;
+    @apply mx-auto mb-1.5 h-1 w-8 rounded-full bg-neutral-400/50 sm:hidden;
   }
 }

@@ -29,9 +29,9 @@ function icon(kind: MapMarker['kind']) {
       : '#2563eb';
   return L.divIcon({
     className: 'crab-marker',
-    html: `<div style="display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:${bg};box-shadow:0 2px 6px rgba(0,0,0,.3);border:2px solid #fff"><svg viewBox="0 0 24 24" width="20" height="20" style="transform:rotate(45deg)">${GLYPH[kind]}</svg></div>`,
-    iconSize: [34, 34],
-    iconAnchor: [17, 32],
+    html: `<div style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:${bg};box-shadow:0 2px 6px rgba(0,0,0,.28);border:2px solid #fff"><svg viewBox="0 0 24 24" width="16" height="16" style="transform:rotate(45deg)">${GLYPH[kind]}</svg></div>`,
+    iconSize: [28, 28],
+    iconAnchor: [14, 26],
   });
 }
 
@@ -135,7 +135,7 @@ function MapBackdrop() {
       </defs>
 
       {/* land */}
-      <rect width="480" height="960" fill="#eceef2" />
+      <rect width="480" height="960" fill="#d9e2ef" />
       {/* block subdivisions + street grid */}
       <rect width="480" height="960" fill="url(#crab-lanes)" />
       <rect width="480" height="960" fill="url(#crab-streets)" />
@@ -151,12 +151,12 @@ function MapBackdrop() {
       </g>
 
       {/* park */}
-      <rect x="255" y="560" width="185" height="150" rx="26" fill="#d6e9cf" />
-      <rect x="255" y="560" width="185" height="150" rx="26" fill="none" stroke="#c4dcbb" strokeWidth="3" />
+      <rect x="255" y="560" width="185" height="150" rx="26" fill="#cbe6c2" />
+      <rect x="255" y="560" width="185" height="150" rx="26" fill="none" stroke="#b6dcaa" strokeWidth="3" />
 
       {/* river across a corner */}
-      <path d="M-40 780 C 90 720 150 900 300 880 C 400 866 450 940 520 900 L520 1000 -40 1000 Z" fill="#c4ddf3" />
-      <path d="M-40 780 C 90 720 150 900 300 880 C 400 866 450 940 520 900" fill="none" stroke="#b2d2ee" strokeWidth="3" />
+      <path d="M-40 780 C 90 720 150 900 300 880 C 400 866 450 940 520 900 L520 1000 -40 1000 Z" fill="#a9cdf0" />
+      <path d="M-40 780 C 90 720 150 900 300 880 C 400 866 450 940 520 900" fill="none" stroke="#93bced" strokeWidth="3" />
       {/* bridges */}
       <path d="M120 812V872" stroke="#ffffff" strokeWidth="13" />
     </svg>
