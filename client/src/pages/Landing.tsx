@@ -12,10 +12,11 @@ export default function Landing() {
   }, [user, navigate]);
 
   return (
-    <div className="relative min-h-[100dvh] bg-white text-slate-900 flex flex-col overflow-hidden">
-      {/* soft coral accent */}
-      <div className="pointer-events-none absolute -top-40 -right-40 h-96 w-96 rounded-full bg-brand-100/60 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-52 -left-40 h-96 w-96 rounded-full bg-brand-50 blur-3xl" />
+    <div className="relative min-h-[100dvh] flex flex-col overflow-hidden text-slate-900">
+      {/* mesh glow */}
+      <div className="pointer-events-none absolute -top-40 -right-32 h-[28rem] w-[28rem] rounded-full bg-brand-300/40 blur-[90px]" />
+      <div className="pointer-events-none absolute top-1/3 -left-40 h-[26rem] w-[26rem] rounded-full bg-sky-300/30 blur-[90px]" />
+      <div className="pointer-events-none absolute -bottom-40 right-0 h-[24rem] w-[24rem] rounded-full bg-brand-200/40 blur-[90px]" />
 
       <header className="relative mx-auto w-full max-w-6xl px-5 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2 font-extrabold text-xl">
@@ -27,10 +28,10 @@ export default function Landing() {
       </header>
 
       <main className="relative flex-1 mx-auto w-full max-w-6xl px-5 grid md:grid-cols-2 gap-12 md:items-center py-10 md:py-16">
-        <div>
-          <span className="pill bg-brand-50 text-brand-600 mb-5">Two ways to ride</span>
-          <h1 className="text-[2.75rem] leading-[1.02] sm:text-6xl font-extrabold">
-            Ride your way.
+        <div className="animate-fade-up">
+          <span className="pill glass text-brand-600 mb-5 shadow-soft">● Two ways to ride</span>
+          <h1 className="font-display text-[3rem] leading-[1.0] sm:text-[4.25rem] font-bold">
+            Ride <span className="text-gradient">your way.</span>
           </h1>
           <p className="mt-5 text-lg text-slate-500 max-w-md leading-relaxed">
             Get a fixed fare in seconds, or name your own price and let nearby drivers bid for your
@@ -52,7 +53,7 @@ export default function Landing() {
           </p>
         </div>
 
-        <div className="grid gap-3">
+        <div className="grid gap-3.5">
           <Feature Icon={Zap} title="Fixed fare" text="Upfront price from distance & time. Nearest driver auto-matched." />
           <Feature Icon={Coins} title="Name your price" text="Propose a fare, drivers accept or counter, you choose." />
           <Feature Icon={Route} title="Live tracking" text="Watch your driver approach in real time, with ETA & ratings." />
@@ -64,12 +65,12 @@ export default function Landing() {
 
 function Feature({ Icon, title, text }: { Icon: ComponentType<IconProps>; title: string; text: string }) {
   return (
-    <div className="card p-5 flex gap-4 items-start">
-      <div className="shrink-0 grid h-11 w-11 place-items-center rounded-2xl bg-brand-50 text-brand-500">
+    <div className="card lift p-5 flex gap-4 items-start">
+      <div className="shrink-0 grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-brand-400 to-brand-600 text-white shadow-glow-sm">
         <Icon size={22} />
       </div>
       <div>
-        <h3 className="font-semibold text-[17px]">{title}</h3>
+        <h3 className="font-bold text-[17px]">{title}</h3>
         <p className="text-slate-500 text-sm mt-0.5 leading-relaxed">{text}</p>
       </div>
     </div>

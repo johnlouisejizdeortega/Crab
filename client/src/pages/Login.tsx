@@ -26,8 +26,8 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen grid place-items-center bg-slate-50 px-4">
-      <div className="w-full max-w-sm">
+    <div className="min-h-[100dvh] grid place-items-center px-4">
+      <div className="w-full max-w-sm animate-fade-up">
         <Link to="/" className="flex items-center justify-center gap-2 font-extrabold text-2xl mb-6">
           <CrabLogo size={34} className="text-brand-500" /> Crab
         </Link>

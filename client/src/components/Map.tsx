@@ -87,22 +87,78 @@ export default function Map({
   );
 
   return (
-    <MapContainer
-      center={center}
-      zoom={13}
-      className={className ?? 'h-full w-full'}
-      zoomControl={false}
-      attributionControl={false}
+    <div className={`relative overflow-hidden ${className ?? 'h-full w-full'}`}>
+      <MapBackdrop />
+      <MapContainer
+        center={center}
+        zoom={13}
+        className="absolute inset-0 h-full w-full"
+        zoomControl={false}
+        attributionControl={false}
+      >
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        {onClick && <ClickHandler onClick={onClick} />}
+        {path && (
+          <Polyline positions={path} pathOptions={{ color: '#f1543f', weight: 5, opacity: 0.9 }} />
+        )}
+        {markers.map((m) => (
+          <Marker key={m.id} position={[m.lat, m.lng]} icon={icon(m.kind)} />
+        ))}
+        {fit && <FitBounds markers={markers} focus={focus} />}
+      </MapContainer>
+    </div>
+  );
+}
+
+/**
+ * A hand-designed vector map used as the base layer. Real raster tiles paint on
+ * top of it when reachable; when they aren't (offline / blocked CDN), this still
+ * reads as a real, modern map instead of a blank canvas.
+ */
+function MapBackdrop() {
+  return (
+    <svg
+      className="pointer-events-none absolute inset-0 h-full w-full"
+      viewBox="0 0 480 960"
+      preserveAspectRatio="xMidYMid slice"
+      aria-hidden="true"
     >
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      {onClick && <ClickHandler onClick={onClick} />}
-      {path && (
-        <Polyline positions={path} pathOptions={{ color: '#f1543f', weight: 5, opacity: 0.85 }} />
-      )}
-      {markers.map((m) => (
-        <Marker key={m.id} position={[m.lat, m.lng]} icon={icon(m.kind)} />
-      ))}
-      {fit && <FitBounds markers={markers} focus={focus} />}
-    </MapContainer>
+      <defs>
+        <pattern id="crab-streets" width="78" height="78" patternUnits="userSpaceOnUse">
+          <path d="M0 0H78" stroke="#ffffff" strokeWidth="8" />
+          <path d="M0 0V78" stroke="#ffffff" strokeWidth="8" />
+        </pattern>
+        <pattern id="crab-lanes" width="26" height="26" patternUnits="userSpaceOnUse">
+          <path d="M0 0H26" stroke="#eef2f8" strokeWidth="2.5" />
+          <path d="M0 0V26" stroke="#eef2f8" strokeWidth="2.5" />
+        </pattern>
+      </defs>
+
+      {/* land */}
+      <rect width="480" height="960" fill="#e6ecf4" />
+      {/* block subdivisions + street grid */}
+      <rect width="480" height="960" fill="url(#crab-lanes)" />
+      <rect width="480" height="960" fill="url(#crab-streets)" />
+
+      {/* avenues (wider white with soft casing) */}
+      <g strokeLinecap="round">
+        <path d="M-40 250H520" stroke="#dbe3ee" strokeWidth="20" />
+        <path d="M-40 250H520" stroke="#ffffff" strokeWidth="13" />
+        <path d="M120 -40V1000" stroke="#dbe3ee" strokeWidth="20" />
+        <path d="M120 -40V1000" stroke="#ffffff" strokeWidth="13" />
+        <path d="M-60 -40L560 720" stroke="#dbe3ee" strokeWidth="22" />
+        <path d="M-60 -40L560 720" stroke="#ffffff" strokeWidth="14" />
+      </g>
+
+      {/* park */}
+      <rect x="255" y="560" width="185" height="150" rx="26" fill="#d6e9cf" />
+      <rect x="255" y="560" width="185" height="150" rx="26" fill="none" stroke="#c4dcbb" strokeWidth="3" />
+
+      {/* river across a corner */}
+      <path d="M-40 780 C 90 720 150 900 300 880 C 400 866 450 940 520 900 L520 1000 -40 1000 Z" fill="#c4ddf3" />
+      <path d="M-40 780 C 90 720 150 900 300 880 C 400 866 450 940 520 900" fill="none" stroke="#b2d2ee" strokeWidth="3" />
+      {/* bridges */}
+      <path d="M120 812V872" stroke="#ffffff" strokeWidth="13" />
+    </svg>
   );
 }

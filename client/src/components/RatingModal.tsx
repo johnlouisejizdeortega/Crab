@@ -30,8 +30,8 @@ export default function RatingModal({ ride, counterpartName, onDone }: Props) {
   return (
     <div className="fixed inset-0 z-[2000] bg-black/40 grid place-items-center p-4">
       <div className="card w-full max-w-sm p-6 text-center">
-        <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-brand-50 text-brand-500">
-          <CheckCircle size={34} />
+        <div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-brand-400 to-brand-600 text-white shadow-glow">
+          <CheckCircle size={36} />
         </div>
         <h2 className="mt-3 text-lg font-bold">Trip complete</h2>
         <p className="text-slate-500 text-sm">

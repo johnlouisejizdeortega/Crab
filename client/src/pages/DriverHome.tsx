@@ -175,17 +175,22 @@ export default function DriverHome() {
           )}
 
           {/* Online toggle */}
-          <div className="card p-4 flex items-center justify-between">
-            <div>
-              <p className="font-bold">{online ? 'You’re online' : 'You’re offline'}</p>
-              <p className="text-xs text-slate-500">
-                {online ? 'Tap the map to move your car' : 'Go online to receive requests'}
-              </p>
+          <div className="card-glass p-4 flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <span
+                className={`h-2.5 w-2.5 rounded-full ${online ? 'bg-emerald-500 shadow-[0_0_0_4px_rgba(16,185,129,0.18)]' : 'bg-slate-300'}`}
+              />
+              <div>
+                <p className="font-bold">{online ? 'You’re online' : 'You’re offline'}</p>
+                <p className="text-xs text-slate-500">
+                  {online ? 'Tap the map to move your car' : 'Go online to receive requests'}
+                </p>
+              </div>
             </div>
             <button
               onClick={toggleOnline}
               disabled={busy || !!active}
-              className={`relative h-8 w-14 rounded-full transition ${online ? 'bg-brand-500' : 'bg-slate-300'}`}
+              className={`relative h-8 w-14 rounded-full transition ${online ? 'bg-gradient-to-br from-brand-400 to-brand-600 shadow-glow-sm' : 'bg-slate-300'}`}
             >
               <span className={`absolute top-1 h-6 w-6 rounded-full bg-white shadow transition ${online ? 'left-7' : 'left-1'}`} />
             </button>
@@ -221,7 +226,7 @@ function RequestList({
 }) {
   if (incoming.length === 0) {
     return (
-      <div className="card p-6 text-center text-slate-500">
+      <div className="card-glass p-6 text-center text-slate-500">
         <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-slate-100 text-slate-400">
           <RadioTower size={24} />
         </div>
@@ -255,7 +260,7 @@ function RequestCard({
   const toPickup = haversineKm(pos, ride.pickup);
 
   return (
-    <div className="card p-5 space-y-3.5">
+    <div className="card-glass p-5 space-y-3.5">
       <div className="flex items-center justify-between">
         <span className="pill bg-brand-50 text-brand-600">
           {ride.model === 'BID' ? <Coins size={13} /> : <Zap size={13} />}
@@ -346,20 +351,20 @@ function ActiveTrip({
       : null;
 
   return (
-    <div className="card p-5 space-y-4">
+    <div className="card-glass p-5 space-y-4">
       <div className="flex items-center justify-between">
         <div>
           <p className="text-xs uppercase tracking-wide text-slate-400">Active trip</p>
           <h2 className="text-lg font-bold">{STATUS_LABEL[trip.status]}</h2>
         </div>
         <div className="text-right">
-          <div className="text-2xl font-extrabold">{money(trip.agreedFare)}</div>
+          <div className="font-display text-2xl font-bold">{money(trip.agreedFare)}</div>
           <div className="text-xs text-slate-400">you earn</div>
         </div>
       </div>
 
-      <div className="flex items-center gap-3 rounded-xl bg-slate-50 p-3">
-        <div className="h-11 w-11 rounded-full bg-brand-100 grid place-items-center text-brand-600">
+      <div className="flex items-center gap-3 rounded-2xl bg-slate-50/80 p-3">
+        <div className="h-11 w-11 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 grid place-items-center text-white shadow-glow-sm">
           <UserRound size={22} />
         </div>
         <div className="flex-1">

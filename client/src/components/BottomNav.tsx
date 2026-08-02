@@ -24,14 +24,14 @@ export default function BottomNav() {
         ];
 
   return (
-    <nav className="md:hidden sticky bottom-0 z-[900] bg-white/90 backdrop-blur-xl border-t border-slate-100 pb-safe">
-      <div className="grid grid-cols-4 px-2 pt-1.5">
+    <nav className="md:hidden sticky bottom-0 z-[900] glass border-t border-white/70 shadow-[0_-8px_30px_-12px_rgba(15,23,42,0.15)] pb-safe">
+      <div className="grid grid-cols-4 px-2 pt-2">
         {tabs.map(({ to, label, Icon }) => (
           <NavLink
             key={to}
             to={to}
             className={({ isActive }) =>
-              `flex flex-col items-center gap-1 py-1.5 text-[11px] font-medium transition ${
+              `flex flex-col items-center gap-1 py-1 text-[11px] font-semibold transition ${
                 isActive ? 'text-brand-600' : 'text-slate-400'
               }`
             }
@@ -40,10 +40,12 @@ export default function BottomNav() {
               <>
                 <span
                   className={`grid h-9 w-14 place-items-center rounded-full transition ${
-                    isActive ? 'bg-brand-50' : ''
+                    isActive
+                      ? 'bg-gradient-to-br from-brand-400 to-brand-600 text-white shadow-glow-sm'
+                      : ''
                   }`}
                 >
-                  <Icon size={22} strokeWidth={isActive ? 2.4 : 2} />
+                  <Icon size={21} strokeWidth={isActive ? 2.3 : 2} />
                 </span>
                 {label}
               </>
