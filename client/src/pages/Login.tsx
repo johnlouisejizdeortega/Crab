@@ -31,7 +31,7 @@ export default function Login() {
         <Link to="/" className="flex items-center justify-center gap-2 font-extrabold text-2xl mb-6">
           <CrabLogo size={34} className="text-brand-500" /> Crab
         </Link>
-        <form onSubmit={onSubmit} className="card p-6 space-y-4">
+        <form onSubmit={onSubmit} className="card p-6 space-y-5">
           <h1 className="text-xl font-bold">Welcome back</h1>
           {error && <p className="text-sm text-rose-600 bg-rose-50 rounded-lg px-3 py-2">{error}</p>}
           <div>

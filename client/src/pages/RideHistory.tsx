@@ -18,9 +18,9 @@ export default function RideHistory() {
   }, []);
 
   return (
-    <div className="mx-auto max-w-2xl w-full px-4 py-6">
-      <h1 className="text-xl font-bold mb-0.5">Your rides</h1>
-      <p className="text-neutral-500 text-[13px] mb-5">
+    <div className="mx-auto max-w-2xl w-full px-5 py-10">
+      <h1 className="text-xl font-bold mb-1">Your rides</h1>
+      <p className="text-neutral-500 text-[13px] mb-6">
         {user?.role === 'DRIVER' ? 'Trips you’ve driven' : 'Trips you’ve taken'}
       </p>
 
@@ -34,11 +34,11 @@ export default function RideHistory() {
           <p className="mt-3 text-[13px]">No rides yet. Your trips will appear here.</p>
         </div>
       ) : (
-        <div className="space-y-2.5">
+        <div className="space-y-3.5">
           {rides.map((r) => {
             const other = user?.role === 'DRIVER' ? r.rider : r.driver;
             return (
-              <div key={r.id} className="card p-3.5">
+              <div key={r.id} className="card p-4">
                 <div className="flex items-center justify-between">
                   <span className={`pill ${STATUS_COLOR[r.status]}`}>{STATUS_LABEL[r.status]}</span>
                   <span className="text-[11px] text-neutral-400">{timeAgo(r.createdAt)}</span>

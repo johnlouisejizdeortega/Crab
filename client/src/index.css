@@ -8,9 +8,10 @@
   color-scheme: light;
 }
 
-/* Very compact: shrink the whole rem-based scale (text + spacing). */
+/* Compact but roomy: modestly smaller than default so there's breathing room
+   without oversized items. */
 html {
-  font-size: 14px;
+  font-size: 15px;
 }
 
 html,
@@ -62,7 +63,7 @@ h3 {
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition active:scale-[.98] disabled:opacity-40 disabled:pointer-events-none;
+    @apply inline-flex items-center justify-center gap-1.5 rounded-full px-5 py-2.5 text-sm font-semibold transition active:scale-[.98] disabled:opacity-40 disabled:pointer-events-none;
   }
   /* Primary action = neutral near-black (orange stays an accent, not a surface) */
   .btn-primary {
@@ -95,13 +96,13 @@ h3 {
     @apply material-thick rounded-2xl;
   }
   .input {
-    @apply w-full rounded-xl bg-black/[0.05] border border-transparent px-3.5 py-2 text-sm outline-none focus:bg-white focus:border-neutral-300 focus:ring-2 focus:ring-neutral-200 transition placeholder:text-neutral-400;
+    @apply w-full rounded-xl bg-black/[0.05] border border-transparent px-4 py-2.5 text-sm outline-none focus:bg-white focus:border-neutral-300 focus:ring-2 focus:ring-neutral-200 transition placeholder:text-neutral-400;
   }
   .textarea {
     @apply input;
   }
   .label {
-    @apply block text-[13px] font-medium text-neutral-500 mb-1;
+    @apply block text-[13px] font-medium text-neutral-500 mb-1.5;
   }
   .pill {
     @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold;
@@ -111,7 +112,7 @@ h3 {
     @apply grid gap-1 p-0.5 bg-black/[0.05] rounded-lg;
   }
   .segment-btn {
-    @apply flex items-center justify-center gap-1.5 py-1.5 rounded-md text-[13px] font-semibold text-neutral-600 transition;
+    @apply flex items-center justify-center gap-1.5 py-2 rounded-md text-[13px] font-semibold text-neutral-600 transition;
   }
   .segment-btn-active {
     @apply bg-white text-neutral-900 shadow-sm;
@@ -121,10 +122,10 @@ h3 {
     @apply material-thick rounded-xl overflow-hidden;
   }
   .list-row {
-    @apply flex items-center gap-3 px-3.5 py-2.5;
+    @apply flex items-center gap-3.5 px-4 py-3.5;
   }
   .section-title {
-    @apply px-3.5 mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-neutral-400;
+    @apply px-4 mb-2.5 text-[11px] font-semibold uppercase tracking-wide text-neutral-400;
   }
   /* Rounded-square leading icon (neutral by default) */
   .app-chip {

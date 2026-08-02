@@ -206,7 +206,7 @@ export default function RiderHome() {
       </div>
 
       <div className="pointer-events-none absolute inset-0 z-[600] flex flex-col justify-end sm:block">
-        <div className="pointer-events-auto space-y-3 sm:absolute sm:top-6 sm:left-6 sm:w-[26rem] sm:max-w-[calc(100vw-3rem)]">
+        <div className="pointer-events-auto space-y-3.5 sm:absolute sm:top-6 sm:left-6 sm:w-[24rem] sm:max-w-[calc(100vw-3rem)]">
           {error && (
             <div className="mx-3 sm:mx-0 card px-4 py-2 text-sm text-rose-600 flex justify-between items-center">
               {error}
@@ -281,7 +281,7 @@ function RequestForm(props: {
   const ready = pickup && drop && estimate;
 
   return (
-    <div className="card-glass p-4 space-y-3.5 rounded-b-none rounded-t-2xl sm:rounded-2xl max-h-[82vh] overflow-y-auto">
+    <div className="card-glass p-5 space-y-4 rounded-b-none rounded-t-2xl sm:rounded-2xl max-h-[84vh] overflow-y-auto">
       <div className="grabber" />
       <div>
         <h1 className="text-xl font-bold">Where to?</h1>
@@ -418,7 +418,7 @@ function ActiveRidePanel({
   const sortedBids = [...bids].sort((a, b) => a.amount - b.amount);
 
   return (
-    <div className="card-glass p-4 space-y-3.5 rounded-b-none rounded-t-2xl sm:rounded-2xl max-h-[82vh] overflow-y-auto">
+    <div className="card-glass p-5 space-y-4 rounded-b-none rounded-t-2xl sm:rounded-2xl max-h-[84vh] overflow-y-auto">
       <div className="grabber" />
       <div className="flex items-center justify-between">
         <div>
@@ -469,7 +469,7 @@ function ActiveRidePanel({
 
       {!searching && ride.driver && (
         <div className="space-y-3">
-          <div className="flex items-center gap-3 rounded-2xl bg-black/[0.03] p-3">
+          <div className="flex items-center gap-3 rounded-2xl bg-black/[0.03] p-3.5">
             <div className="app-chip h-9 w-9 rounded-full bg-neutral-900 text-white">
               <UserRound size={18} />
             </div>

@@ -25,13 +25,13 @@ export default function BottomNav() {
 
   return (
     <nav className="md:hidden sticky bottom-0 z-[900] material-bar border-t border-black/[0.07] pb-safe">
-      <div className="grid grid-cols-4 px-2 pt-1">
+      <div className="grid grid-cols-4 px-2 pt-1.5">
         {tabs.map(({ to, label, Icon }) => (
           <NavLink
             key={to}
             to={to}
             className={({ isActive }) =>
-              `flex flex-col items-center gap-0.5 py-1 text-[10px] font-medium transition ${
+              `flex flex-col items-center gap-1 py-1.5 text-[10px] font-medium transition ${
                 isActive ? 'text-brand-600' : 'text-neutral-500'
               }`
             }

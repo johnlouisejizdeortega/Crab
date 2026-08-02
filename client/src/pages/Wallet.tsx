@@ -42,19 +42,19 @@ export default function Wallet() {
   }
 
   return (
-    <div className="mx-auto max-w-2xl w-full px-4 py-8">
-      <h1 className="text-xl font-bold mb-4">Wallet</h1>
+    <div className="mx-auto max-w-2xl w-full px-5 py-10">
+      <h1 className="text-xl font-bold mb-5">Wallet</h1>
 
-      <div className="rounded-2xl p-5 text-white bg-neutral-900">
+      <div className="rounded-2xl p-6 text-white bg-neutral-900">
         <p className="text-[13px] text-white/60">Available balance</p>
-        <p className="text-3xl leading-none font-bold mt-1.5 tabular-nums">{money(balance)}</p>
-        <div className="mt-5 flex gap-2">
+        <p className="text-3xl leading-none font-bold mt-2 tabular-nums">{money(balance)}</p>
+        <div className="mt-6 flex gap-2.5">
           {[10, 25, 50].map((a) => (
             <button
               key={a}
               disabled={busy}
               onClick={() => topup(a)}
-              className="btn bg-white/10 hover:bg-white/20 text-white !py-1.5 !px-3 text-[13px]"
+              className="btn bg-white/10 hover:bg-white/20 text-white !py-2 !px-3.5 text-[13px]"
             >
               <Plus size={15} /> {money(a)}
             </button>
@@ -62,7 +62,7 @@ export default function Wallet() {
         </div>
       </div>
 
-      <h2 className="section-title mt-6">Transactions</h2>
+      <h2 className="section-title mt-9">Transactions</h2>
       {loading ? (
         <p className="text-slate-400 px-4">Loading…</p>
       ) : txns.length === 0 ? (

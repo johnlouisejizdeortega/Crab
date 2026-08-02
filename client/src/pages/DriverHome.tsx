@@ -164,7 +164,7 @@ export default function DriverHome() {
       </div>
 
       <div className="pointer-events-none absolute inset-0 z-[600] flex flex-col justify-end sm:block">
-        <div className="pointer-events-auto space-y-3 p-3 sm:p-0 sm:absolute sm:top-6 sm:left-6 sm:w-[26rem] sm:max-w-[calc(100vw-3rem)]">
+        <div className="pointer-events-auto space-y-3.5 p-3.5 sm:p-0 sm:absolute sm:top-6 sm:left-6 sm:w-[24rem] sm:max-w-[calc(100vw-3rem)]">
           {error && (
             <div className="card px-4 py-2 text-sm text-rose-600 flex justify-between items-center">
               {error}
@@ -175,7 +175,7 @@ export default function DriverHome() {
           )}
 
           {/* Online toggle */}
-          <div className="card-glass p-4 flex items-center justify-between">
+          <div className="card-glass p-5 flex items-center justify-between">
             <div className="flex items-center gap-2.5">
               <span
                 className={`h-2.5 w-2.5 rounded-full ${online ? 'bg-emerald-500 shadow-[0_0_0_4px_rgba(16,185,129,0.18)]' : 'bg-slate-300'}`}
@@ -260,7 +260,7 @@ function RequestCard({
   const toPickup = haversineKm(pos, ride.pickup);
 
   return (
-    <div className="card-glass p-4 space-y-3">
+    <div className="card-glass p-5 space-y-4">
       <div className="flex items-center justify-between">
         <span className="pill bg-neutral-100 text-neutral-600">
           {ride.model === 'BID' ? <Coins size={12} /> : <Zap size={12} />}
@@ -351,7 +351,7 @@ function ActiveTrip({
       : null;
 
   return (
-    <div className="card-glass p-4 space-y-3">
+    <div className="card-glass p-5 space-y-4">
       <div className="flex items-center justify-between">
         <div>
           <p className="text-xs uppercase tracking-wide text-slate-400">Active trip</p>
@@ -363,7 +363,7 @@ function ActiveTrip({
         </div>
       </div>
 
-      <div className="flex items-center gap-3 rounded-2xl bg-black/[0.03] p-3">
+      <div className="flex items-center gap-3 rounded-2xl bg-black/[0.03] p-3.5">
         <div className="app-chip h-9 w-9 rounded-full bg-neutral-900 text-white">
           <UserRound size={18} />
         </div>

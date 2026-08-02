@@ -54,7 +54,7 @@ export default function Register() {
         <Link to="/" className="flex items-center justify-center gap-2 font-extrabold text-2xl mb-6">
           <CrabLogo size={34} className="text-brand-500" /> Crab
         </Link>
-        <form onSubmit={onSubmit} className="card p-6 space-y-4">
+        <form onSubmit={onSubmit} className="card p-6 space-y-5">
           <h1 className="text-xl font-bold">Create your account</h1>
 
           <div className="segment grid-cols-2">

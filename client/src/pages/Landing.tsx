@@ -54,7 +54,7 @@ export default function Landing() {
           </p>
         </div>
 
-        <div className="grid gap-3.5">
+        <div className="grid gap-4">
           <Feature Icon={Zap} title="Fixed fare" text="Upfront price from distance & time. Nearest driver auto-matched." />
           <Feature Icon={Coins} title="Name your price" text="Propose a fare, drivers accept or counter, you choose." />
           <Feature Icon={Route} title="Live tracking" text="Watch your driver approach in real time, with ETA & ratings." />
@@ -66,9 +66,9 @@ export default function Landing() {
 
 function Feature({ Icon, title, text }: { Icon: ComponentType<IconProps>; title: string; text: string }) {
   return (
-    <div className="card p-4 flex gap-3 items-start transition active:scale-[.99]">
-      <div className="app-chip shrink-0 h-9 w-9 bg-neutral-900 text-white">
-        <Icon size={18} />
+    <div className="card p-5 flex gap-3.5 items-start transition active:scale-[.99]">
+      <div className="app-chip shrink-0 h-10 w-10 bg-neutral-900 text-white">
+        <Icon size={19} />
       </div>
       <div>
         <h3 className="font-semibold text-[15px]">{title}</h3>
