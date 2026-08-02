@@ -1,6 +1,7 @@
 import { FormEvent, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../store/auth';
+import { CrabLogo, Car, SteeringWheel } from '../components/icons';
 import type { Role } from '../types';
 
 export default function Register() {
@@ -51,7 +52,7 @@ export default function Register() {
     <div className="min-h-screen grid place-items-center bg-slate-50 px-4 py-10">
       <div className="w-full max-w-md">
         <Link to="/" className="flex items-center justify-center gap-2 font-extrabold text-2xl mb-6">
-          <span className="text-3xl">🦀</span> Crab
+          <CrabLogo size={34} className="text-brand-500" /> Crab
         </Link>
         <form onSubmit={onSubmit} className="card p-6 space-y-4">
           <h1 className="text-xl font-bold">Create your account</h1>
@@ -62,11 +63,12 @@ export default function Register() {
                 type="button"
                 key={r}
                 onClick={() => setRole(r)}
-                className={`py-2 rounded-lg text-sm font-semibold transition ${
+                className={`flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-semibold transition ${
                   role === r ? 'bg-white shadow-sm text-slate-900' : 'text-slate-500'
                 }`}
               >
-                {r === 'RIDER' ? '🧍 Ride' : '🚗 Drive'}
+                {r === 'RIDER' ? <Car size={18} /> : <SteeringWheel size={18} />}
+                {r === 'RIDER' ? 'Ride' : 'Drive'}
               </button>
             ))}
           </div>

@@ -10,19 +10,26 @@ export interface MapMarker {
   label?: string;
 }
 
-const EMOJI: Record<MapMarker['kind'], string> = {
-  pickup: '🟢',
-  drop: '📍',
-  car: '🚗',
-  me: '🧍',
+// Inline SVG glyphs (white, drawn inside the colored pin/badge).
+const GLYPH: Record<MapMarker['kind'], string> = {
+  pickup: '<circle cx="12" cy="12" r="3.2" fill="#fff"/>',
+  drop: '<path d="M12 6.5a3.2 3.2 0 0 0-3.2 3.2c0 2.2 3.2 5 3.2 5s3.2-2.8 3.2-5A3.2 3.2 0 0 0 12 6.5Z" fill="#fff"/>',
+  car: '<path d="M17.5 15.2h1.3c.4 0 .7-.3.7-.7v-2c0-.6-.4-1.1-1-1.3-1.2-.4-3-.8-3-.8s-.9-.9-1.5-1.5c-.3-.3-.7-.4-1.2-.4H7.3c-.4 0-.8.2-.9.6l-.9 1.9c-.2.2-.3.5-.3.8v2.2c0 .4.3.7.7.7h.9" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="15.2" r="1.3" fill="#fff"/><circle cx="15" cy="15.2" r="1.3" fill="#fff"/>',
+  me: '<circle cx="12" cy="9.5" r="2.4" fill="#fff"/><path d="M8 16a4 4 0 0 1 8 0" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>',
 };
 
 function icon(kind: MapMarker['kind']) {
   const bg =
-    kind === 'car' ? '#0f172a' : kind === 'pickup' ? '#00c46f' : kind === 'drop' ? '#ef4444' : '#3b82f6';
+    kind === 'car'
+      ? '#0f172a'
+      : kind === 'pickup'
+      ? '#16a34a'
+      : kind === 'drop'
+      ? '#f1543f'
+      : '#2563eb';
   return L.divIcon({
     className: 'crab-marker',
-    html: `<div style="display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:${bg};box-shadow:0 2px 6px rgba(0,0,0,.3);border:2px solid #fff"><span style="transform:rotate(45deg);font-size:16px;line-height:1">${EMOJI[kind]}</span></div>`,
+    html: `<div style="display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:${bg};box-shadow:0 2px 6px rgba(0,0,0,.3);border:2px solid #fff"><svg viewBox="0 0 24 24" width="20" height="20" style="transform:rotate(45deg)">${GLYPH[kind]}</svg></div>`,
     iconSize: [34, 34],
     iconAnchor: [17, 32],
   });
@@ -90,7 +97,7 @@ export default function Map({
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       {onClick && <ClickHandler onClick={onClick} />}
       {path && (
-        <Polyline positions={path} pathOptions={{ color: '#00c46f', weight: 5, opacity: 0.8 }} />
+        <Polyline positions={path} pathOptions={{ color: '#f1543f', weight: 5, opacity: 0.85 }} />
       )}
       {markers.map((m) => (
         <Marker key={m.id} position={[m.lat, m.lng]} icon={icon(m.kind)} />

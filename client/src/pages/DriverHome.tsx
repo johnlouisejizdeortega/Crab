@@ -6,6 +6,7 @@ import { money, km, STATUS_LABEL } from '../lib/format';
 import Map, { MapMarker } from '../components/Map';
 import Stars from '../components/Stars';
 import RatingModal from '../components/RatingModal';
+import { RadioTower, Zap, Coins, MapPin, UserRound, X } from '../components/icons';
 import type { Ride } from '../types';
 
 const CITY = { lat: 14.5995, lng: 120.9842 };
@@ -157,17 +158,19 @@ export default function DriverHome() {
     : null;
 
   return (
-    <div className="relative flex-1 min-h-[calc(100vh-3.5rem)]">
+    <div className="relative flex-1 min-h-0">
       <div className="absolute inset-0">
         <Map markers={markers} line={line} onClick={onMapClick} focus={[pos.lat, pos.lng]} />
       </div>
 
-      <div className="relative z-[600] p-4 sm:p-6 pointer-events-none">
-        <div className="pointer-events-auto w-full max-w-md ml-auto sm:ml-0 space-y-3">
+      <div className="pointer-events-none absolute inset-0 z-[600] flex flex-col justify-end sm:block">
+        <div className="pointer-events-auto space-y-3 p-3 sm:p-0 sm:absolute sm:top-6 sm:left-6 sm:w-[26rem] sm:max-w-[calc(100vw-3rem)]">
           {error && (
             <div className="card px-4 py-2 text-sm text-rose-600 flex justify-between items-center">
               {error}
-              <button onClick={() => setError('')} className="text-slate-400">✕</button>
+              <button onClick={() => setError('')} className="text-slate-400">
+                <X size={16} />
+              </button>
             </div>
           )}
 
@@ -219,13 +222,15 @@ function RequestList({
   if (incoming.length === 0) {
     return (
       <div className="card p-6 text-center text-slate-500">
-        <div className="text-3xl">📡</div>
-        <p className="mt-2 text-sm">Waiting for ride requests nearby…</p>
+        <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-slate-100 text-slate-400">
+          <RadioTower size={24} />
+        </div>
+        <p className="mt-3 text-sm">Waiting for ride requests nearby…</p>
       </div>
     );
   }
   return (
-    <div className="space-y-3 max-h-[70vh] overflow-auto">
+    <div className="space-y-3 max-h-[62vh] overflow-auto">
       {incoming.map((r) => (
         <RequestCard key={r.id} ride={r} pos={pos} onAccept={onAccept} onBid={onBid} busy={busy} />
       ))}
@@ -253,14 +258,21 @@ function RequestCard({
     <div className="card p-4 space-y-3">
       <div className="flex items-center justify-between">
         <span className="pill bg-slate-100 text-slate-600">
-          {ride.model === 'BID' ? '🤝 Offer' : '⚡ Fixed'}
+          {ride.model === 'BID' ? <Coins size={13} /> : <Zap size={13} />}
+          {ride.model === 'BID' ? 'Offer' : 'Fixed'}
         </span>
         <span className="text-xs text-slate-400">{toPickup.toFixed(1)} km to pickup</span>
       </div>
 
-      <div className="text-sm space-y-1">
-        <p>🟢 {ride.pickup.label.split(',').slice(0, 2).join(',')}</p>
-        <p>📍 {ride.drop.label.split(',').slice(0, 2).join(',')}</p>
+      <div className="text-sm space-y-1.5">
+        <p className="flex items-center gap-2">
+          <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 shrink-0" />
+          {ride.pickup.label.split(',').slice(0, 2).join(',')}
+        </p>
+        <p className="flex items-center gap-2">
+          <MapPin size={14} className="text-brand-500 shrink-0" />
+          {ride.drop.label.split(',').slice(0, 2).join(',')}
+        </p>
         <p className="text-xs text-slate-400">{km(ride.distanceKm)} trip</p>
       </div>
 
@@ -347,7 +359,9 @@ function ActiveTrip({
       </div>
 
       <div className="flex items-center gap-3 rounded-xl bg-slate-50 p-3">
-        <div className="h-11 w-11 rounded-full bg-brand-100 grid place-items-center text-lg">🧍</div>
+        <div className="h-11 w-11 rounded-full bg-brand-100 grid place-items-center text-brand-600">
+          <UserRound size={22} />
+        </div>
         <div className="flex-1">
           <div className="flex items-center gap-2">
             <span className="font-semibold">{trip.rider?.name ?? 'Rider'}</span>
@@ -359,9 +373,15 @@ function ActiveTrip({
         </div>
       </div>
 
-      <div className="text-sm text-slate-600 space-y-1">
-        <p>🟢 {trip.pickup.label.split(',').slice(0, 2).join(',')}</p>
-        <p>📍 {trip.drop.label.split(',').slice(0, 2).join(',')}</p>
+      <div className="text-sm text-slate-600 space-y-1.5">
+        <p className="flex items-center gap-2">
+          <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 shrink-0" />
+          {trip.pickup.label.split(',').slice(0, 2).join(',')}
+        </p>
+        <p className="flex items-center gap-2">
+          <MapPin size={14} className="text-brand-500 shrink-0" />
+          {trip.drop.label.split(',').slice(0, 2).join(',')}
+        </p>
       </div>
 
       <p className="text-xs text-slate-400 text-center">Tap the map to drive your car toward the pin.</p>

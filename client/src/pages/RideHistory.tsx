@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { api } from '../lib/api';
 import { useAuth } from '../store/auth';
 import { money, km, timeAgo, STATUS_LABEL, STATUS_COLOR } from '../lib/format';
+import { MapIcon, MapPin, Coins, Zap } from '../components/icons';
 import type { Ride } from '../types';
 
 export default function RideHistory() {
@@ -27,8 +28,10 @@ export default function RideHistory() {
         <p className="text-slate-400">Loading…</p>
       ) : rides.length === 0 ? (
         <div className="card p-10 text-center text-slate-500">
-          <div className="text-4xl">🗺️</div>
-          <p className="mt-2">No rides yet. Your trips will appear here.</p>
+          <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-slate-100 text-slate-400">
+            <MapIcon size={28} />
+          </div>
+          <p className="mt-3">No rides yet. Your trips will appear here.</p>
         </div>
       ) : (
         <div className="space-y-3">
@@ -41,10 +44,17 @@ export default function RideHistory() {
                   <span className="text-xs text-slate-400">{timeAgo(r.createdAt)}</span>
                 </div>
                 <div className="mt-3 flex justify-between items-end">
-                  <div className="text-sm text-slate-600 space-y-0.5">
-                    <p>🟢 {r.pickup.label.split(',').slice(0, 2).join(',')}</p>
-                    <p>📍 {r.drop.label.split(',').slice(0, 2).join(',')}</p>
-                    <p className="text-xs text-slate-400">
+                  <div className="text-sm text-slate-600 space-y-1">
+                    <p className="flex items-center gap-2">
+                      <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 shrink-0" />
+                      {r.pickup.label.split(',').slice(0, 2).join(',')}
+                    </p>
+                    <p className="flex items-center gap-2">
+                      <MapPin size={14} className="text-brand-500 shrink-0" />
+                      {r.drop.label.split(',').slice(0, 2).join(',')}
+                    </p>
+                    <p className="flex items-center gap-1.5 text-xs text-slate-400">
+                      {r.model === 'BID' ? <Coins size={12} /> : <Zap size={12} />}
                       {km(r.distanceKm)} · {r.model === 'BID' ? 'Named price' : 'Fixed'}
                       {other ? ` · ${other.name}` : ''}
                     </p>

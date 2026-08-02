@@ -3,6 +3,8 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { useAuth } from './store/auth';
 import { getToken } from './lib/api';
 import Navbar from './components/Navbar';
+import BottomNav from './components/BottomNav';
+import { CrabLogo } from './components/icons';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -24,8 +26,10 @@ function Protected({ role, children }: { role?: 'RIDER' | 'DRIVER'; children: JS
 
 function FullscreenSpinner() {
   return (
-    <div className="h-screen grid place-items-center text-slate-400">
-      <div className="animate-pulse text-3xl">🦀</div>
+    <div className="h-screen grid place-items-center">
+      <div className="animate-pulse text-brand-500">
+        <CrabLogo size={44} />
+      </div>
     </div>
   );
 }
@@ -45,9 +49,9 @@ export default function App() {
   if (loading && getToken()) return <FullscreenSpinner />;
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-[100dvh] flex flex-col">
       {showNav && <Navbar />}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col min-h-0">
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
@@ -95,6 +99,7 @@ export default function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
+      {showNav && <BottomNav />}
     </div>
   );
 }

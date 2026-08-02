@@ -1,6 +1,7 @@
 import { FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../store/auth';
+import { CrabLogo } from '../components/icons';
 
 export default function Login() {
   const { login } = useAuth();
@@ -28,7 +29,7 @@ export default function Login() {
     <div className="min-h-screen grid place-items-center bg-slate-50 px-4">
       <div className="w-full max-w-sm">
         <Link to="/" className="flex items-center justify-center gap-2 font-extrabold text-2xl mb-6">
-          <span className="text-3xl">🦀</span> Crab
+          <CrabLogo size={34} className="text-brand-500" /> Crab
         </Link>
         <form onSubmit={onSubmit} className="card p-6 space-y-4">
           <h1 className="text-xl font-bold">Welcome back</h1>

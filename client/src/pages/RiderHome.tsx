@@ -8,6 +8,18 @@ import Map, { MapMarker } from '../components/Map';
 import AddressSearch from '../components/AddressSearch';
 import Stars from '../components/Stars';
 import RatingModal from '../components/RatingModal';
+import {
+  MapPin,
+  Route,
+  Clock,
+  Zap,
+  Coins,
+  Search,
+  Car,
+  UserRound,
+  ArrowRight,
+  X,
+} from '../components/icons';
 import type { Bid, Estimate, Point, Ride, RideModel } from '../types';
 
 const CITY: Point = { lat: 14.5995, lng: 120.9842, label: 'Manila' };
@@ -188,17 +200,19 @@ export default function RiderHome() {
       : null;
 
   return (
-    <div className="relative flex-1 min-h-[calc(100vh-3.5rem)]">
+    <div className="relative flex-1 min-h-0">
       <div className="absolute inset-0">
         <Map markers={markers} line={line} onClick={onMapClick} focus={driverPos ? [driverPos.lat, driverPos.lng] : undefined} />
       </div>
 
-      <div className="relative z-[600] p-4 sm:p-6 pointer-events-none">
-        <div className="pointer-events-auto w-full max-w-md ml-auto sm:ml-0">
+      <div className="pointer-events-none absolute inset-0 z-[600] flex flex-col justify-end sm:block">
+        <div className="pointer-events-auto space-y-3 sm:absolute sm:top-6 sm:left-6 sm:w-[26rem] sm:max-w-[calc(100vw-3rem)]">
           {error && (
-            <div className="mb-3 card px-4 py-2 text-sm text-rose-600 flex justify-between items-center">
+            <div className="mx-3 sm:mx-0 card px-4 py-2 text-sm text-rose-600 flex justify-between items-center">
               {error}
-              <button onClick={() => setError('')} className="text-slate-400">✕</button>
+              <button onClick={() => setError('')} className="text-slate-400">
+                <X size={16} />
+              </button>
             </div>
           )}
 
@@ -267,7 +281,8 @@ function RequestForm(props: {
   const ready = pickup && drop && estimate;
 
   return (
-    <div className="card p-5 space-y-4">
+    <div className="card p-5 space-y-4 rounded-b-none rounded-t-3xl sm:rounded-3xl max-h-[82vh] overflow-y-auto">
+      <div className="grabber" />
       <div>
         <h1 className="text-lg font-bold">Where to?</h1>
         <p className="text-sm text-slate-500">Search an address or tap the map.</p>
@@ -287,7 +302,7 @@ function RequestForm(props: {
             title="Set pickup by tapping the map"
             onClick={() => props.setPicking('pickup')}
           >
-            📍
+            <MapPin size={18} />
           </button>
         </div>
         <div className="flex gap-2">
@@ -303,7 +318,7 @@ function RequestForm(props: {
             title="Set destination by tapping the map"
             onClick={() => props.setPicking('drop')}
           >
-            📍
+            <MapPin size={18} />
           </button>
         </div>
       </div>
@@ -311,23 +326,23 @@ function RequestForm(props: {
       {estimating && <p className="text-sm text-slate-400">Calculating route…</p>}
       {estimate && (
         <div className="flex items-center gap-4 text-sm text-slate-600 bg-slate-50 rounded-xl px-4 py-2">
-          <span>🛣️ {km(estimate.distanceKm)}</span>
-          <span>⏱️ {mins(estimate.durationMin)}</span>
+          <span className="flex items-center gap-1.5"><Route size={16} className="text-slate-400" /> {km(estimate.distanceKm)}</span>
+          <span className="flex items-center gap-1.5"><Clock size={16} className="text-slate-400" /> {mins(estimate.durationMin)}</span>
         </div>
       )}
 
       <div className="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-xl">
         <button
           onClick={() => setMode('FIXED')}
-          className={`py-2 rounded-lg text-sm font-semibold transition ${mode === 'FIXED' ? 'bg-white shadow-sm' : 'text-slate-500'}`}
+          className={`flex items-center justify-center gap-1.5 py-2 rounded-lg text-sm font-semibold transition ${mode === 'FIXED' ? 'bg-white shadow-sm' : 'text-slate-500'}`}
         >
-          ⚡ Fixed fare
+          <Zap size={16} /> Fixed fare
         </button>
         <button
           onClick={() => setMode('BID')}
-          className={`py-2 rounded-lg text-sm font-semibold transition ${mode === 'BID' ? 'bg-white shadow-sm' : 'text-slate-500'}`}
+          className={`flex items-center justify-center gap-1.5 py-2 rounded-lg text-sm font-semibold transition ${mode === 'BID' ? 'bg-white shadow-sm' : 'text-slate-500'}`}
         >
-          🤝 Name price
+          <Coins size={16} /> Name price
         </button>
       </div>
 
@@ -403,7 +418,8 @@ function ActiveRidePanel({
   const sortedBids = [...bids].sort((a, b) => a.amount - b.amount);
 
   return (
-    <div className="card p-5 space-y-4">
+    <div className="card p-5 space-y-4 rounded-b-none rounded-t-3xl sm:rounded-3xl max-h-[82vh] overflow-y-auto">
+      <div className="grabber" />
       <div className="flex items-center justify-between">
         <div>
           <p className="text-xs uppercase tracking-wide text-slate-400">
@@ -411,7 +427,9 @@ function ActiveRidePanel({
           </p>
           <h2 className="text-lg font-bold">{STATUS_LABEL[ride.status]}</h2>
         </div>
-        <span className="text-2xl">{searching ? '🔎' : ride.status === 'IN_PROGRESS' ? '🚕' : '🚗'}</span>
+        <span className="grid h-10 w-10 place-items-center rounded-full bg-brand-50 text-brand-500">
+          {searching ? <Search size={20} /> : <Car size={20} />}
+        </span>
       </div>
 
       {searching && ride.model === 'FIXED' && (
@@ -452,7 +470,9 @@ function ActiveRidePanel({
       {!searching && ride.driver && (
         <div className="space-y-3">
           <div className="flex items-center gap-3 rounded-xl bg-slate-50 p-3">
-            <div className="h-11 w-11 rounded-full bg-brand-100 grid place-items-center text-lg">🧑‍✈️</div>
+            <div className="h-11 w-11 rounded-full bg-brand-100 grid place-items-center text-brand-600">
+              <UserRound size={22} />
+            </div>
             <div className="flex-1">
               <div className="flex items-center gap-2">
                 <span className="font-semibold">{ride.driver.name}</span>
@@ -473,10 +493,14 @@ function ActiveRidePanel({
         </div>
       )}
 
-      <div className="flex items-center justify-between text-xs text-slate-400">
-        <span>🟢 {ride.pickup.label.split(',')[0]}</span>
-        <span>→</span>
-        <span>📍 {ride.drop.label.split(',')[0]}</span>
+      <div className="flex items-center justify-between text-xs text-slate-500">
+        <span className="flex items-center gap-1.5">
+          <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" /> {ride.pickup.label.split(',')[0]}
+        </span>
+        <ArrowRight size={14} className="text-slate-300" />
+        <span className="flex items-center gap-1.5">
+          <MapPin size={13} className="text-brand-500" /> {ride.drop.label.split(',')[0]}
+        </span>
       </div>
 
       {ride.status !== 'IN_PROGRESS' && (

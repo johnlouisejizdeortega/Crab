@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { api } from '../lib/api';
 import { useAuth } from '../store/auth';
 import Stars from '../components/Stars';
+import { UserRound, SteeringWheel } from '../components/icons';
 import type { User } from '../types';
 
 export default function Profile() {
@@ -36,8 +37,8 @@ export default function Profile() {
   return (
     <div className="mx-auto max-w-lg w-full px-4 py-8">
       <div className="card p-6 mb-6 flex items-center gap-4">
-        <div className="h-16 w-16 rounded-full bg-brand-100 grid place-items-center text-3xl">
-          {isDriver ? '🧑‍✈️' : '🧍'}
+        <div className="h-16 w-16 rounded-full bg-brand-100 grid place-items-center text-brand-600">
+          {isDriver ? <SteeringWheel size={30} /> : <UserRound size={30} />}
         </div>
         <div>
           <h1 className="text-xl font-bold">{user.name}</h1>

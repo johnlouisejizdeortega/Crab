@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { api } from '../lib/api';
 import { useAuth } from '../store/auth';
 import { money, timeAgo } from '../lib/format';
+import { Plus, ArrowUpRight, ArrowDownLeft } from '../components/icons';
 import type { Transaction } from '../types';
 
 const KIND_LABEL: Record<string, string> = {
@@ -55,7 +56,7 @@ export default function Wallet() {
               onClick={() => topup(a)}
               className="btn bg-white/15 hover:bg-white/25 text-white text-sm"
             >
-              + {money(a)}
+              <Plus size={16} /> {money(a)}
             </button>
           ))}
         </div>
@@ -69,10 +70,17 @@ export default function Wallet() {
       ) : (
         <div className="card divide-y divide-slate-100">
           {txns.map((t) => (
-            <div key={t.id} className="flex items-center justify-between px-4 py-3">
-              <div>
+            <div key={t.id} className="flex items-center gap-3 px-4 py-3">
+              <div
+                className={`grid h-9 w-9 shrink-0 place-items-center rounded-full ${
+                  t.amount >= 0 ? 'bg-emerald-50 text-emerald-600' : 'bg-slate-100 text-slate-500'
+                }`}
+              >
+                {t.amount >= 0 ? <ArrowDownLeft size={18} /> : <ArrowUpRight size={18} />}
+              </div>
+              <div className="flex-1 min-w-0">
                 <p className="font-medium text-sm">{KIND_LABEL[t.kind] ?? t.kind}</p>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-slate-400 truncate">
                   {t.note ?? ''} · {timeAgo(t.createdAt)}
                 </p>
               </div>

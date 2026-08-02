@@ -65,3 +65,22 @@ body {
 .crab-marker {
   transition: transform 0.8s linear;
 }
+
+/* Safe-area helpers for mobile (notches / home indicator) */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.bottom-safe {
+  bottom: env(safe-area-inset-bottom);
+}
+
+@layer components {
+  /* Bottom-sheet on mobile, floating left card on desktop */
+  .sheet {
+    @apply card absolute inset-x-0 bottom-0 rounded-b-none rounded-t-3xl shadow-[0_-8px_30px_rgba(0,0,0,0.12)]
+      sm:inset-x-auto sm:bottom-auto sm:top-6 sm:left-6 sm:w-[26rem] sm:max-w-[calc(100vw-3rem)] sm:rounded-3xl sm:shadow-xl;
+  }
+  .grabber {
+    @apply mx-auto mb-1 h-1.5 w-10 rounded-full bg-slate-200 sm:hidden;
+  }
+}

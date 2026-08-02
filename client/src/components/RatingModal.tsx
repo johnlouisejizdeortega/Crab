@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Stars from './Stars';
+import { CheckCircle } from './icons';
 import { api } from '../lib/api';
 import { money } from '../lib/format';
 import type { Ride } from '../types';
@@ -29,8 +30,10 @@ export default function RatingModal({ ride, counterpartName, onDone }: Props) {
   return (
     <div className="fixed inset-0 z-[2000] bg-black/40 grid place-items-center p-4">
       <div className="card w-full max-w-sm p-6 text-center">
-        <div className="text-4xl">🎉</div>
-        <h2 className="mt-2 text-lg font-bold">Trip complete</h2>
+        <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-brand-50 text-brand-500">
+          <CheckCircle size={34} />
+        </div>
+        <h2 className="mt-3 text-lg font-bold">Trip complete</h2>
         <p className="text-slate-500 text-sm">
           {money(ride.agreedFare ?? ride.fixedFare)} · {ride.distanceKm.toFixed(1)} km
         </p>

@@ -1,3 +1,5 @@
+import { Star } from './icons';
+
 interface Props {
   value: number;
   onChange?: (v: number) => void;
@@ -5,7 +7,7 @@ interface Props {
   count?: number;
 }
 
-export default function Stars({ value, onChange, size = 18, count }: Props) {
+export default function Stars({ value, onChange, size = 16, count }: Props) {
   return (
     <span className="inline-flex items-center gap-0.5">
       {[1, 2, 3, 4, 5].map((n) => (
@@ -15,10 +17,13 @@ export default function Stars({ value, onChange, size = 18, count }: Props) {
           disabled={!onChange}
           onClick={() => onChange?.(n)}
           className={onChange ? 'cursor-pointer' : 'cursor-default'}
-          style={{ fontSize: size, lineHeight: 1 }}
           aria-label={`${n} star`}
         >
-          <span className={n <= Math.round(value) ? 'text-amber-400' : 'text-slate-300'}>★</span>
+          <Star
+            size={size}
+            filled={n <= Math.round(value)}
+            className={n <= Math.round(value) ? 'text-amber-400' : 'text-slate-300'}
+          />
         </button>
       ))}
       {count != null && <span className="ml-1 text-xs text-slate-400">({count})</span>}
