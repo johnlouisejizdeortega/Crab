@@ -281,7 +281,7 @@ function RequestForm(props: {
   const ready = pickup && drop && estimate;
 
   return (
-    <div className="card-glass p-6 space-y-5 rounded-b-none rounded-t-[2rem] sm:rounded-[2rem] max-h-[82vh] overflow-y-auto">
+    <div className="card-glass p-6 space-y-5 rounded-b-none rounded-t-[1.5rem] sm:rounded-[1.5rem] max-h-[82vh] overflow-y-auto">
       <div className="grabber" />
       <div>
         <h1 className="text-xl font-bold">Where to?</h1>
@@ -350,7 +350,7 @@ function RequestForm(props: {
         <div className="flex items-end justify-between">
           <div>
             <p className="text-sm text-slate-500">Upfront fare</p>
-            <p className="font-display text-4xl font-bold">{estimate ? money(estimate.fixedFare) : '—'}</p>
+            <p className="text-4xl font-bold tracking-tight tabular-nums">{estimate ? money(estimate.fixedFare) : '—'}</p>
           </div>
           <span className="pill bg-brand-50 text-brand-700">Auto-matched</span>
         </div>
@@ -418,7 +418,7 @@ function ActiveRidePanel({
   const sortedBids = [...bids].sort((a, b) => a.amount - b.amount);
 
   return (
-    <div className="card-glass p-6 space-y-5 rounded-b-none rounded-t-[2rem] sm:rounded-[2rem] max-h-[82vh] overflow-y-auto">
+    <div className="card-glass p-6 space-y-5 rounded-b-none rounded-t-[1.5rem] sm:rounded-[1.5rem] max-h-[82vh] overflow-y-auto">
       <div className="grabber" />
       <div className="flex items-center justify-between">
         <div>
@@ -427,7 +427,7 @@ function ActiveRidePanel({
           </p>
           <h2 className="text-lg font-bold">{STATUS_LABEL[ride.status]}</h2>
         </div>
-        <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-brand-400 to-brand-600 text-white shadow-glow-sm">
+        <span className="app-chip h-11 w-11 bg-brand-500">
           {searching ? <Search size={20} /> : <Car size={20} />}
         </span>
       </div>
@@ -469,8 +469,8 @@ function ActiveRidePanel({
 
       {!searching && ride.driver && (
         <div className="space-y-3">
-          <div className="flex items-center gap-3 rounded-2xl bg-slate-50/80 p-3">
-            <div className="h-11 w-11 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 grid place-items-center text-white shadow-glow-sm">
+          <div className="flex items-center gap-3 rounded-2xl bg-black/[0.03] p-3">
+            <div className="app-chip h-11 w-11 rounded-full bg-brand-500">
               <UserRound size={22} />
             </div>
             <div className="flex-1">

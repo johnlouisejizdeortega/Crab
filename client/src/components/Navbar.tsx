@@ -17,7 +17,7 @@ export default function Navbar() {
     : { to: '/ride', label: 'Ride', Icon: Car };
 
   return (
-    <header className="hidden md:block sticky top-0 z-[500] glass border-x-0 border-t-0 border-b border-white/60">
+    <header className="hidden md:block sticky top-0 z-[500] material-bar border-b border-black/[0.07]">
       <div className="mx-auto max-w-6xl px-4 h-14 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 font-extrabold text-lg">
           <span className="text-brand-500">

@@ -29,9 +29,9 @@ export default function Landing() {
 
       <main className="relative flex-1 mx-auto w-full max-w-6xl px-5 grid md:grid-cols-2 gap-12 md:items-center py-10 md:py-16">
         <div className="animate-fade-up">
-          <span className="pill glass text-brand-600 mb-5 shadow-soft">● Two ways to ride</span>
-          <h1 className="font-display text-[3rem] leading-[1.0] sm:text-[4.25rem] font-bold">
-            Ride <span className="text-gradient">your way.</span>
+          <span className="pill material text-brand-600 mb-5">● Two ways to ride</span>
+          <h1 className="text-[3rem] leading-[1.02] sm:text-[4.25rem] font-bold tracking-[-0.03em]">
+            Ride <span className="text-brand-500">your way.</span>
           </h1>
           <p className="mt-5 text-lg text-slate-500 max-w-md leading-relaxed">
             Get a fixed fare in seconds, or name your own price and let nearby drivers bid for your
@@ -42,7 +42,7 @@ export default function Landing() {
             <Link to="/register?role=RIDER" className="btn-primary btn-lg">
               <Car size={20} /> I need a ride
             </Link>
-            <Link to="/register?role=DRIVER" className="btn-dark btn-lg">
+            <Link to="/register?role=DRIVER" className="btn-tinted btn-lg">
               <SteeringWheel size={20} /> I want to drive
             </Link>
           </div>
@@ -65,9 +65,9 @@ export default function Landing() {
 
 function Feature({ Icon, title, text }: { Icon: ComponentType<IconProps>; title: string; text: string }) {
   return (
-    <div className="card lift p-5 flex gap-4 items-start">
-      <div className="shrink-0 grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-brand-400 to-brand-600 text-white shadow-glow-sm">
-        <Icon size={22} />
+    <div className="card p-5 flex gap-4 items-start transition active:scale-[.99]">
+      <div className="app-chip shrink-0 h-11 w-11 bg-brand-500">
+        <Icon size={21} />
       </div>
       <div>
         <h3 className="font-bold text-[17px]">{title}</h3>

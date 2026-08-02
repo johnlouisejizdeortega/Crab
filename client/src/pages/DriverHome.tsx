@@ -190,7 +190,7 @@ export default function DriverHome() {
             <button
               onClick={toggleOnline}
               disabled={busy || !!active}
-              className={`relative h-8 w-14 rounded-full transition ${online ? 'bg-gradient-to-br from-brand-400 to-brand-600 shadow-glow-sm' : 'bg-slate-300'}`}
+              className={`relative h-8 w-14 rounded-full transition ${online ? 'bg-brand-500' : 'bg-slate-300'}`}
             >
               <span className={`absolute top-1 h-6 w-6 rounded-full bg-white shadow transition ${online ? 'left-7' : 'left-1'}`} />
             </button>
@@ -358,13 +358,13 @@ function ActiveTrip({
           <h2 className="text-lg font-bold">{STATUS_LABEL[trip.status]}</h2>
         </div>
         <div className="text-right">
-          <div className="font-display text-2xl font-bold">{money(trip.agreedFare)}</div>
+          <div className="text-2xl font-bold tabular-nums">{money(trip.agreedFare)}</div>
           <div className="text-xs text-slate-400">you earn</div>
         </div>
       </div>
 
-      <div className="flex items-center gap-3 rounded-2xl bg-slate-50/80 p-3">
-        <div className="h-11 w-11 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 grid place-items-center text-white shadow-glow-sm">
+      <div className="flex items-center gap-3 rounded-2xl bg-black/[0.03] p-3">
+        <div className="app-chip h-11 w-11 rounded-full bg-brand-500">
           <UserRound size={22} />
         </div>
         <div className="flex-1">

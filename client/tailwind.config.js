@@ -18,14 +18,20 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-        display: ['"Space Grotesk"', '"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        sans: [
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"SF Pro Text"',
+          '"SF Pro Display"',
+          'Inter',
+          'system-ui',
+          'sans-serif',
+        ],
       },
       boxShadow: {
         soft: '0 1px 2px rgba(15,23,42,0.04), 0 8px 24px -12px rgba(15,23,42,0.16)',
         float: '0 8px 40px -12px rgba(15,23,42,0.28)',
-        glow: '0 8px 24px -6px rgba(241,84,63,0.5)',
-        'glow-sm': '0 4px 14px -4px rgba(241,84,63,0.45)',
+        material: 'inset 0 1px 0 rgba(255,255,255,0.6), 0 10px 34px -14px rgba(0,0,0,0.22)',
       },
       keyframes: {
         'fade-up': {

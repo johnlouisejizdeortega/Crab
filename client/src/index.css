@@ -16,24 +16,19 @@ body,
 
 body {
   margin: 0;
-  color: #0f172a;
+  color: #1c1c1e;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  letter-spacing: -0.011em;
-  background-color: #f6f7fb;
-  background-image: radial-gradient(58rem 40rem at 108% -8%, rgba(241, 84, 63, 0.1), transparent 60%),
-    radial-gradient(48rem 36rem at -12% 8%, rgba(56, 130, 246, 0.08), transparent 60%);
-  background-attachment: fixed;
+  letter-spacing: -0.01em;
+  /* iOS systemGroupedBackground */
+  background-color: #f2f2f7;
 }
 
+/* iOS large-title feel */
 h1,
 h2,
 h3 {
-  letter-spacing: -0.02em;
-}
-
-h1 {
-  font-family: 'Space Grotesk', 'Plus Jakarta Sans', system-ui, sans-serif;
+  letter-spacing: -0.022em;
 }
 
 /* Leaflet marker fix (icons are otherwise broken under bundlers) is handled in
@@ -47,29 +42,51 @@ h1 {
 }
 
 @layer components {
+  /* Apple vibrancy materials: blur + saturation + translucency + light edge */
+  .material {
+    @apply bg-white/60 backdrop-blur-2xl backdrop-saturate-150 border border-white/50 shadow-material;
+  }
+  .material-thick {
+    @apply bg-white/75 backdrop-blur-2xl backdrop-saturate-150 border border-white/60 shadow-material;
+  }
+  .material-bar {
+    @apply bg-white/70 backdrop-blur-xl backdrop-saturate-150;
+  }
+
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 font-semibold transition active:scale-[.98] disabled:opacity-40 disabled:pointer-events-none;
   }
+  /* iOS filled accent (solid, restrained) */
   .btn-primary {
-    @apply btn text-white shadow-glow bg-gradient-to-br from-brand-400 to-brand-600 hover:from-brand-500 hover:to-brand-600;
+    @apply btn bg-brand-500 text-white hover:bg-brand-600 active:brightness-95;
   }
   .btn-dark {
-    @apply btn bg-slate-900 text-white hover:bg-slate-800 shadow-soft;
+    @apply btn bg-slate-900 text-white hover:bg-slate-800;
   }
+  /* iOS tinted secondary (subtle gray) */
+  .btn-tinted {
+    @apply btn bg-slate-900/[0.06] text-slate-900 hover:bg-slate-900/[0.1];
+  }
+  /* Glass capsule */
   .btn-ghost {
-    @apply btn bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 shadow-soft;
+    @apply btn material text-slate-800 hover:bg-white/80;
   }
   .btn-lg {
     @apply px-6 py-3.5 text-base;
   }
+  /* iOS grouped card: flat white on the grouped background */
   .card {
-    @apply bg-white rounded-3xl border border-slate-100/80 shadow-soft;
+    @apply bg-white rounded-2xl border border-black/[0.06];
+  }
+  /* Glass card for overlays that float over the map */
+  .card-glass {
+    @apply material-thick rounded-[1.5rem];
   }
   .input {
-    @apply w-full rounded-full bg-slate-100/70 border border-transparent px-5 py-3 outline-none focus:bg-white focus:border-brand-300 focus:ring-4 focus:ring-brand-100/70 transition placeholder:text-slate-400;
+    @apply w-full rounded-2xl bg-black/[0.04] border border-transparent px-4 py-3 outline-none focus:bg-white focus:border-brand-300 focus:ring-2 focus:ring-brand-200 transition placeholder:text-slate-400;
   }
   .textarea {
-    @apply w-full rounded-2xl bg-slate-100/70 border border-transparent px-4 py-3 outline-none focus:bg-white focus:border-brand-300 focus:ring-4 focus:ring-brand-100/70 transition placeholder:text-slate-400;
+    @apply input rounded-2xl;
   }
   .label {
     @apply block text-sm font-medium text-slate-500 mb-1.5;
@@ -77,29 +94,29 @@ h1 {
   .pill {
     @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold;
   }
-  /* Segmented control (pill) */
+  /* iOS UISegmentedControl */
   .segment {
-    @apply grid gap-1 p-1 bg-slate-100/80 rounded-full;
+    @apply grid gap-1 p-1 bg-black/[0.05] rounded-xl;
   }
   .segment-btn {
-    @apply flex items-center justify-center gap-1.5 py-2.5 rounded-full text-sm font-semibold text-slate-500 transition;
+    @apply flex items-center justify-center gap-1.5 py-2 rounded-lg text-sm font-semibold text-slate-600 transition;
   }
   .segment-btn-active {
-    @apply bg-white text-slate-900 shadow-soft;
+    @apply bg-white text-slate-900 shadow-sm;
   }
-  /* Frosted glass surface */
-  .glass {
-    @apply bg-white/70 backdrop-blur-xl border border-white/60;
+  /* iOS grouped list */
+  .list-group {
+    @apply bg-white rounded-2xl border border-black/[0.06] overflow-hidden;
   }
-  /* Glass card for overlays that float on the map */
-  .card-glass {
-    @apply bg-white/85 backdrop-blur-2xl border border-white/70 shadow-float rounded-[2rem];
+  .list-row {
+    @apply flex items-center gap-3 px-4 py-3;
   }
-  .lift {
-    @apply transition duration-200 sm:hover:-translate-y-0.5 sm:hover:shadow-float;
+  .section-title {
+    @apply px-4 mb-2 text-xs font-semibold uppercase tracking-wide text-slate-400;
   }
-  .text-gradient {
-    @apply bg-gradient-to-br from-brand-500 to-brand-700 bg-clip-text text-transparent;
+  /* iOS colored rounded-square leading icon */
+  .app-chip {
+    @apply grid place-items-center rounded-[0.8rem] text-white;
   }
 }
 
@@ -119,10 +136,10 @@ h1 {
 @layer components {
   /* Bottom-sheet on mobile, floating left card on desktop */
   .sheet {
-    @apply absolute inset-x-0 bottom-0 rounded-b-none rounded-t-[2rem] bg-white/85 backdrop-blur-2xl border-x border-t border-white/70 shadow-[0_-12px_50px_-14px_rgba(15,23,42,0.22)]
-      sm:inset-x-auto sm:bottom-auto sm:top-6 sm:left-6 sm:w-[26rem] sm:max-w-[calc(100vw-3rem)] sm:rounded-[2rem] sm:border sm:shadow-float;
+    @apply material-thick absolute inset-x-0 bottom-0 rounded-b-none rounded-t-[1.5rem]
+      sm:inset-x-auto sm:bottom-auto sm:top-6 sm:left-6 sm:w-[26rem] sm:max-w-[calc(100vw-3rem)] sm:rounded-[1.5rem];
   }
   .grabber {
-    @apply mx-auto mb-2 h-1.5 w-11 rounded-full bg-slate-300/70 sm:hidden;
+    @apply mx-auto mb-2 h-1.5 w-9 rounded-full bg-slate-400/50 sm:hidden;
   }
 }

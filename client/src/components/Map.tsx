@@ -135,7 +135,7 @@ function MapBackdrop() {
       </defs>
 
       {/* land */}
-      <rect width="480" height="960" fill="#e6ecf4" />
+      <rect width="480" height="960" fill="#eceef2" />
       {/* block subdivisions + street grid */}
       <rect width="480" height="960" fill="url(#crab-lanes)" />
       <rect width="480" height="960" fill="url(#crab-streets)" />
