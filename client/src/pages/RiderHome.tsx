@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { getSocket, emitAck } from '../lib/socket';
 import { api } from '../lib/api';
 import { useAuth } from '../store/auth';
@@ -18,6 +19,7 @@ import {
   Car,
   UserRound,
   ArrowRight,
+  ArrowLeft,
   X,
 } from '../components/icons';
 import type { Bid, Estimate, Point, Ride, RideModel } from '../types';
@@ -26,10 +28,12 @@ const CITY: Point = { lat: 14.5995, lng: 120.9842, label: 'Manila' };
 
 export default function RiderHome() {
   const { refresh } = useAuth();
+  const navigate = useNavigate();
+  const [params] = useSearchParams();
   const [pickup, setPickup] = useState<Point | null>(null);
   const [drop, setDrop] = useState<Point | null>(null);
   const [picking, setPicking] = useState<'pickup' | 'drop'>('drop');
-  const [mode, setMode] = useState<RideModel>('FIXED');
+  const [mode, setMode] = useState<RideModel>(params.get('mode') === 'bid' ? 'BID' : 'FIXED');
   const [estimate, setEstimate] = useState<Estimate | null>(null);
   const [offer, setOffer] = useState<number>(0);
   const [estimating, setEstimating] = useState(false);
@@ -204,6 +208,15 @@ export default function RiderHome() {
       <div className="absolute inset-0">
         <Map markers={markers} line={line} onClick={onMapClick} focus={driverPos ? [driverPos.lat, driverPos.lng] : undefined} />
       </div>
+
+      {/* Back to dashboard */}
+      <button
+        onClick={() => navigate('/ride')}
+        className="absolute left-4 top-4 z-[700] material grid h-10 w-10 place-items-center rounded-full text-neutral-800 shadow-material"
+        aria-label="Back"
+      >
+        <ArrowLeft size={20} />
+      </button>
 
       <div className="pointer-events-none absolute inset-0 z-[600] flex flex-col justify-end sm:block">
         <div className="pointer-events-auto space-y-3.5 sm:absolute sm:top-6 sm:left-6 sm:w-[24rem] sm:max-w-[calc(100vw-3rem)]">

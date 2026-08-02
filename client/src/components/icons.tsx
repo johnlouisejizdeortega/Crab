@@ -193,6 +193,19 @@ export const ArrowRight = (p: IconProps) => (
   </Line>
 );
 
+export const ArrowLeft = (p: IconProps) => (
+  <Line {...p}>
+    <path d="M19 12H5" />
+    <path d="m12 19-7-7 7-7" />
+  </Line>
+);
+
+export const ChevronRight = (p: IconProps) => (
+  <Line {...p}>
+    <path d="m9 18 6-6-6-6" />
+  </Line>
+);
+
 export const LogOut = (p: IconProps) => (
   <Line {...p}>
     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />

@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import BottomNav from './components/BottomNav';
 import { CrabLogo } from './components/icons';
 import Landing from './pages/Landing';
+import RiderDashboard from './pages/RiderDashboard';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import RiderHome from './pages/RiderHome';
@@ -58,6 +59,14 @@ export default function App() {
           <Route path="/register" element={<Register />} />
           <Route
             path="/ride"
+            element={
+              <Protected role="RIDER">
+                <RiderDashboard />
+              </Protected>
+            }
+          />
+          <Route
+            path="/book"
             element={
               <Protected role="RIDER">
                 <RiderHome />
